@@ -1,0 +1,24 @@
+
+Serial:  WS123PP456
+Marca:  Dell
+Tamano:  123.0
+Precio:  750.5
+SistemaOperativo:  Windows 10
+Procesador:  Intel Core i5
+---------------------------------------
+
+Serial:  8989
+Marca:  acer
+Tamano:  1234.0
+Precio:  180.0
+SistemaOperativo:  Windows 10
+Procesador:  Intel Core i7
+---------------------------------------
+
+Serial:  619f05ae-0
+Marca:  sd
+Tamano:  2312.0
+Precio:  12143.0
+SistemaOperativo:  sad
+Procesador:  fs
+---------------------------------------

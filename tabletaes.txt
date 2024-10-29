@@ -1,0 +1,22 @@
+
+Serial:  PO8759LL77
+Marca:  lenovo
+Tamano:  15.6
+Precio:  750.5
+Almacenamiento:  64 GB
+Peso:  10.8
+---------------------------------------
+
+Serial:  PAO77854LL
+Marca:  mac
+Tamano:  15.4
+Precio:  180.0
+Almacenamiento:  128 GB
+Peso:  14.85
+---------------------------------------
+Serial:  5869
+Marca:  mac
+Tamano:  15.4
+Precio:  180.0
+Almacenamiento:  128 GB
+Peso:  14.85

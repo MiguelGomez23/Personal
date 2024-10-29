@@ -1,0 +1,24 @@
+Cedula:  5558996
+Nombre:  Esteban
+Apellido:  Benitez
+Telefono:  3021458799
+Modalidad de estudio:  Presencial
+Cantidad de asignaturas:  5
+Serial:  8L12347
+---------------------------------------
+Cedula:  89777
+Nombre:  Juan
+Apellido:  Perdomo
+Telefono:  3512224788
+Modalidad de estudio:  Presencial
+Cantidad de asignaturas:  8
+Serial:  7PP5698
+---------------------------------------
+Cedula:  1458
+Nombre:  lop
+Apellido:  lod
+Telefono:  14558
+Modalidad de estudio:  pre
+Cantidad de asignaturas:  5
+Serial:  142666
+---------------------------------------
