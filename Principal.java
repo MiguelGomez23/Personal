@@ -177,6 +177,9 @@ public class Principal {
                                         PrecioBuscar = sc.nextFloat();
                                         System.out.println();
 
+                                        String serialAsignado = null; // Variable para almacenar el serial del
+                                                                      // computador asignado
+
                                         // Buscar el computador que coincida con las características
                                         computadores computadorAsignado = null;
                                         for (computadores comp : listacomp) {
@@ -184,6 +187,7 @@ public class Principal {
                                                     comp.getTamano() == TamanoBuscar &&
                                                     comp.getPrecio() == PrecioBuscar) {
                                                 computadorAsignado = comp;
+                                                serialAsignado = comp.getSerial(); // Asigna el serial aquí
                                                 break; // Salir del bucle si se encuentra un computador
                                             }
                                         }
@@ -202,10 +206,15 @@ public class Principal {
 
                                             // Eliminar el computador de la lista
                                             listacomp.remove(computadorAsignado);
+
+                                            // Puedes usar el serialAsignado aquí si necesitas
+                                            System.out
+                                                    .println("El serial del computador asignado es: " + serialAsignado);
                                         } else {
                                             System.out.println(
                                                     "No se encontró un computador que coincida con las características ingresadas.\n");
                                         }
+
                                         break;
 
                                     case 2:
@@ -233,7 +242,8 @@ public class Principal {
                                             System.out.println("Cédula: " + prestamoEncontrado.getCedula());
                                             System.out.println("Nombre: " + prestamoEncontrado.getNombre());
                                             System.out.println("Apellido: " + prestamoEncontrado.getApellido());
-                                            //System.out.println("Serial del Computador: " + prestamoEncontrado.getSerial());
+                                            // System.out.println("Serial del Computador: " +
+                                            // prestamoEncontrado.getSerial());
                                             System.out.println("-------------------------------\n");
 
                                             int Op = 0;
@@ -265,8 +275,10 @@ public class Principal {
                                                                         "El equipo ha sido devuelto al inventario.\n");
 
                                                                 // Remover el préstamo de la lista de ingeniería
-                                                                listaeing.remove(prestamoEncontrado);
+                                                                //listaeing.remove(prestamoEncontrado);
                                                                 objMetodoseing.ExportarArchivo(listaeing);
+                                                                //objMetodoscomp.ExportarArchivo(listacomp);
+                                                                //objMetodoscomp.ImportarArchivo();
                                                             } else {
                                                                 System.out.println(
                                                                         "El equipo ya está en el inventario.\n");
