@@ -59,7 +59,6 @@ public class computadores {
     public void SeleccionarMarca() {
 
         Scanner scanner = new Scanner(System.in);
-        String MarcaBuscar = "";
 
         int opt = 0;
         do {
@@ -72,13 +71,13 @@ public class computadores {
                 opt = scanner.nextInt();
                 switch (opt) {
                     case 1:
-                        MarcaBuscar = "Acer";
+                        Marca = "Acer";
                         break;
                     case 2:
-                        MarcaBuscar = "Dell";
+                        Marca = "Dell";
                         break;
                     case 3:
-                        MarcaBuscar = "Asus";
+                        Marca = "Asus";
                         break;
                     default:
                         System.out.println("Opción inválida, por favor ingrese del 1 al 3\n");
@@ -90,14 +89,13 @@ public class computadores {
             }
         } while (opt < 1 || opt > 3);
 
-        System.out.println("Marca seleccionada: " + MarcaBuscar);
+        System.out.println("Marca seleccionada: " + Marca);
         System.out.println();
     }
 
     public void Seleccionartamaño() {
 
         Scanner sc = new Scanner(System.in);
-        float TamanoBuscar = 0.0f;
 
         System.out.println("Ingrese el tamaño");
 
@@ -105,30 +103,28 @@ public class computadores {
             System.out.println("Opcion no valida, por favor ingrese un tamaño válido\n");
             sc.next();
         }
-        TamanoBuscar = sc.nextFloat();
-        System.out.println("El tamaño de su computador es: " + TamanoBuscar);
+        Tamano = sc.nextFloat();
+        System.out.println("El tamaño de su computador es: " + Tamano);
         System.out.println();
     }
 
     public void SeleccionarPrecio() {
 
         Scanner sc = new Scanner(System.in);
-        float PrecioBuscar = 0.0f;
 
         System.out.println("Ingrese el precio");
         while (!sc.hasNextFloat()) {
             System.out.println("Opcion no valida, por favor ingrese un precio válido\n");
             sc.next(); // Descartar entrada inválida
         }
-        PrecioBuscar = sc.nextFloat();
-        System.out.println("El precio de su computador es: " + PrecioBuscar);
+        Precio = sc.nextFloat();
+        System.out.println("El precio de su computador es: " + Precio);
         System.out.println();
     }
 
-    public void SeleccionarSO() {
+    public void SeleccionarSistemaOperativo() {
 
         Scanner scanner = new Scanner(System.in);
-        String SistemaOperativoBuscar = "";
 
         int opt = 0;
         do {
@@ -141,13 +137,13 @@ public class computadores {
                 opt = scanner.nextInt();
                 switch (opt) {
                     case 1:
-                        SistemaOperativoBuscar = "Windows 7";
+                        SistemaOperativo = "Windows 7";
                         break;
                     case 2:
-                        SistemaOperativoBuscar = "Windows 10";
+                        SistemaOperativo = "Windows 10";
                         break;
                     case 3:
-                        SistemaOperativoBuscar = "Windows 11";
+                        SistemaOperativo = "Windows 11";
                         break;
                     default:
                         System.out.println("Opción inválida, por favor ingrese del 1 al 3\n");
@@ -159,14 +155,13 @@ public class computadores {
             }
         } while (opt < 1 || opt > 3);
 
-        System.out.println("Sistema operativo seleccionado: " + SistemaOperativoBuscar);
+        System.out.println("Sistema operativo seleccionado: " + SistemaOperativo);
         System.out.println();
     }
 
     public void SeleccionarPr() {
 
         Scanner scanner = new Scanner(System.in);
-        String ProcesadorBuscar = "";
 
         int opt = 0;
         do {
@@ -178,10 +173,10 @@ public class computadores {
                 opt = scanner.nextInt();
                 switch (opt) {
                     case 1:
-                        ProcesadorBuscar = "AMD Ryzen";
+                        Procesador = "AMD Ryzen";
                         break;
                     case 2:
-                        ProcesadorBuscar = "Intel® Core™ i5";
+                        Procesador = "Intel® Core™ i5";
                         break;
                     default:
                         System.out.println("Opción inválida, ingrese 1 o 2\n");
@@ -193,7 +188,7 @@ public class computadores {
             }
         } while (opt < 1 || opt > 2);
 
-        System.out.println("Procesador seleccionado: " + ProcesadorBuscar);
+        System.out.println("Procesador seleccionado: " + Procesador);
         System.out.println();
     }
 }

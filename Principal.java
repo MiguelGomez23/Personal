@@ -142,13 +142,11 @@ public class Principal {
                                         Metodoseing objMetodoseingb = new Metodoseing();
                                         computadores cp = new computadores();
                                         String CedulaBuscarb = "";
-                                        String MarcaBuscar = "";
-                                        Float TamanoBuscar = (float) 0.0;
-                                        Float PrecioBuscar = (float) 0.0;
 
                                         System.out.println("Ingrese su cédula");
                                         CedulaBuscarb = sc.next();
-                                        prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing, CedulaBuscarb);
+                                        prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing,
+                                                CedulaBuscarb);
 
                                         if (resulta == null) {
                                             System.out.println("El registro no existe\n");
@@ -165,27 +163,32 @@ public class Principal {
                                             System.out.println("------------------------------- \n");
                                         }
 
-                                        System.out.println("Ingrese la marca del computador:");
-                                        MarcaBuscar = sc.next();
-                                        System.out.println();
+                                        cp.SeleccionarMarca();
+                                        String MarcaBuscar = cp.getMarca();
 
-                                        System.out.println("Ingrese el tamaño del computador:");
-                                        TamanoBuscar = sc.nextFloat();
-                                        System.out.println();
+                                        cp.Seleccionartamaño();
+                                        Float TamanoBuscar = cp.getTamano();
 
-                                        System.out.println("Ingrese el precio del computador:");
-                                        PrecioBuscar = sc.nextFloat();
-                                        System.out.println();
+                                        cp.SeleccionarPrecio();
+                                        Float PrecioBuscar = cp.getPrecio();
+
+                                        cp.SeleccionarSistemaOperativo();
+                                        String SOBuscar = cp.getSistemaOperativo();
+
+                                        /* cp.SeleccionarPr();
+                                        String ProcesadorBuscar = cp.getProcesador(); */
 
                                         String serialAsignado = null; // Variable para almacenar el serial del
-                                                                      // computador asignado
+                                        // computador asignado
 
                                         // Buscar el computador que coincida con las características
                                         computadores computadorAsignado = null;
                                         for (computadores comp : listacomp) {
                                             if (comp.getMarca().equalsIgnoreCase(MarcaBuscar) &&
                                                     comp.getTamano() == TamanoBuscar &&
-                                                    comp.getPrecio() == PrecioBuscar) {
+                                                    comp.getPrecio() == PrecioBuscar &&
+                                                    comp.getSistemaOperativo().equalsIgnoreCase(SOBuscar) /* &&
+                                                    comp.getProcesador().equalsIgnoreCase(ProcesadorBuscar) */) {
                                                 computadorAsignado = comp;
                                                 serialAsignado = comp.getSerial(); // Asigna el serial aquí
                                                 break; // Salir del bucle si se encuentra un computador
@@ -199,8 +202,8 @@ public class Principal {
                                             System.out.println("Marca: " + computadorAsignado.getMarca());
                                             System.out.println("Tamaño: " + computadorAsignado.getTamano());
                                             System.out.println("Precio: " + computadorAsignado.getPrecio());
-                                            System.out.println(
-                                                    "Sistema operativo: " + computadorAsignado.getSistemaOperativo());
+                                            System.out.println("Sistema operativo: " +
+                                                    computadorAsignado.getSistemaOperativo());
                                             System.out.println("Procesador: " + computadorAsignado.getProcesador());
                                             System.out.println("------------------------------- \n");
 
@@ -214,7 +217,6 @@ public class Principal {
                                             System.out.println(
                                                     "No se encontró un computador que coincida con las características ingresadas.\n");
                                         }
-
                                         break;
 
                                     case 2:
@@ -242,8 +244,6 @@ public class Principal {
                                             System.out.println("Cédula: " + prestamoEncontrado.getCedula());
                                             System.out.println("Nombre: " + prestamoEncontrado.getNombre());
                                             System.out.println("Apellido: " + prestamoEncontrado.getApellido());
-                                            // System.out.println("Serial del Computador: " +
-                                            // prestamoEncontrado.getSerial());
                                             System.out.println("-------------------------------\n");
 
                                             int Op = 0;
@@ -269,16 +269,20 @@ public class Principal {
                                                                 }
                                                             }
 
+                                                            // Si el computador se encontró en la lista de préstamos
                                                             if (equipoADevolver != null) {
+                                                                // Remover el préstamo de la lista de ingeniería
+                                                                listaeing.remove(prestamoEncontrado); // Remover el
+                                                                                                      // préstamo
+                                                                objMetodoseing.ExportarArchivo(listaeing); // Exportar
+                                                                                                           // la lista
+                                                                                                           // actualizada
+
+                                                                // Agregar el computador de vuelta a la lista de
+                                                                // computadores
                                                                 listacomp.add(equipoADevolver);
                                                                 System.out.println(
                                                                         "El equipo ha sido devuelto al inventario.\n");
-
-                                                                // Remover el préstamo de la lista de ingeniería
-                                                                //listaeing.remove(prestamoEncontrado);
-                                                                objMetodoseing.ExportarArchivo(listaeing);
-                                                                //objMetodoscomp.ExportarArchivo(listacomp);
-                                                                //objMetodoscomp.ImportarArchivo();
                                                             } else {
                                                                 System.out.println(
                                                                         "El equipo ya está en el inventario.\n");

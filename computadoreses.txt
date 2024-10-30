@@ -14,11 +14,3 @@ Precio:  180.0
 SistemaOperativo:  Windows 10
 Procesador:  Intel Core i7
 ---------------------------------------
-
-Serial:  619f05ae-0
-Marca:  sd
-Tamano:  2312.0
-Precio:  12143.0
-SistemaOperativo:  sad
-Procesador:  fs
----------------------------------------
