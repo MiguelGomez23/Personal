@@ -283,9 +283,10 @@ public class Principal {
                                                                 listacomp.add(equipoADevolver);
                                                                 System.out.println(
                                                                         "El equipo ha sido devuelto al inventario.\n");
+                                                                        
                                                             } else {
                                                                 System.out.println(
-                                                                        "El equipo ya está en el inventario.\n");
+                                                                        "Equuipo regresado.\n");
                                                             }
                                                             break;
 
