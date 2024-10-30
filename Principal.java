@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -136,86 +137,98 @@ public class Principal {
                             if (sc.hasNextInt()) {
                                 optt = sc.nextInt();
                                 switch (optt) {
+
                                     case 1:
                                         System.out.println("Solicitar préstamo de equipo.\n");
                                         listaeing = objMetodoseing.ImportarArchivo();
                                         Metodoseing objMetodoseingb = new Metodoseing();
                                         computadores cp = new computadores();
-                                        String CedulaBuscarb = "";
+                                        String CedulaBuscarb;
 
                                         System.out.println("Ingrese su cédula");
                                         CedulaBuscarb = sc.next();
-                                        prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing,
-                                                CedulaBuscarb);
+                                        prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing, CedulaBuscarb);
+                                        System.out.println();
+                                        
 
-                                        if (resulta == null) {
-                                            System.out.println("El registro no existe\n");
-                                            listaeing = objMetodoseing.LLenarLista(listaeing);
-                                        } else {
-                                            System.out.println();
-                                            System.out.println("Cédula: " + resulta.getCedula());
-                                            System.out.println("Nombre: " + resulta.getNombre());
-                                            System.out.println("Apellido: " + resulta.getApellido());
-                                            System.out.println("Teléfono: " + resulta.getTelefono());
-                                            System.out.println("Número de semestre: " + resulta.getNumSemestre());
-                                            System.out.println("Promedio: " + resulta.getPromedio());
-                                            System.out.println("Serial: " + resulta.getSerial());
-                                            System.out.println("------------------------------- \n");
-                                        }
-
-                                        cp.SeleccionarMarca();
-                                        String MarcaBuscar = cp.getMarca();
-
-                                        cp.Seleccionartamaño();
-                                        Float TamanoBuscar = cp.getTamano();
-
-                                        cp.SeleccionarPrecio();
-                                        Float PrecioBuscar = cp.getPrecio();
-
-                                        cp.SeleccionarSistemaOperativo();
-                                        String SOBuscar = cp.getSistemaOperativo();
-
-                                        /* cp.SeleccionarPr();
-                                        String ProcesadorBuscar = cp.getProcesador(); */
-
-                                        String serialAsignado = null; // Variable para almacenar el serial del
-                                        // computador asignado
-
-                                        // Buscar el computador que coincida con las características
-                                        computadores computadorAsignado = null;
-                                        for (computadores comp : listacomp) {
-                                            if (comp.getMarca().equalsIgnoreCase(MarcaBuscar) &&
-                                                    comp.getTamano() == TamanoBuscar &&
-                                                    comp.getPrecio() == PrecioBuscar &&
-                                                    comp.getSistemaOperativo().equalsIgnoreCase(SOBuscar) /* &&
-                                                    comp.getProcesador().equalsIgnoreCase(ProcesadorBuscar) */) {
-                                                computadorAsignado = comp;
-                                                serialAsignado = comp.getSerial(); // Asigna el serial aquí
-                                                break; // Salir del bucle si se encuentra un computador
-                                            }
-                                        }
-
-                                        // Verificar si se encontró un computador
-                                        if (computadorAsignado != null) {
-                                            System.out.println("El computador asignado es: ");
-                                            System.out.println("Serial: " + computadorAsignado.getSerial());
-                                            System.out.println("Marca: " + computadorAsignado.getMarca());
-                                            System.out.println("Tamaño: " + computadorAsignado.getTamano());
-                                            System.out.println("Precio: " + computadorAsignado.getPrecio());
-                                            System.out.println("Sistema operativo: " +
-                                                    computadorAsignado.getSistemaOperativo());
-                                            System.out.println("Procesador: " + computadorAsignado.getProcesador());
-                                            System.out.println("------------------------------- \n");
-
-                                            // Eliminar el computador de la lista
-                                            listacomp.remove(computadorAsignado);
-
-                                            // Puedes usar el serialAsignado aquí si necesitas
+                                        if (resulta != null) {
                                             System.out
-                                                    .println("El serial del computador asignado es: " + serialAsignado);
+                                                    .println("Ya hay un préstamo activo con esta cédula\n");
                                         } else {
-                                            System.out.println(
-                                                    "No se encontró un computador que coincida con las características ingresadas.\n");
+                                            listaeing = objMetodoseing.LLenarLista(listaeing);
+
+                                            cp.SeleccionarMarca();
+                                            String MarcaBuscar = cp.getMarca();
+
+                                            cp.Seleccionartamaño();
+                                            Float TamanoBuscar = cp.getTamano();
+
+                                            cp.SeleccionarPrecio();
+                                            Float PrecioBuscar = cp.getPrecio();
+
+                                            cp.SeleccionarSistemaOperativo();
+                                            String SOBuscar = cp.getSistemaOperativo();
+
+                                            cp.SeleccionarPr();
+                                            String ProcesadorBuscar = cp.getProcesador();
+
+                                            computadores computadorAsignado = null;
+                                            String serialAsignado = null; // Variable para almacenar el serial del
+                                                                          // computador asignado
+
+                                            // Buscar el computador que coincida con las características
+                                            for (computadores comp : listacomp) {
+                                                if (comp.getMarca().equalsIgnoreCase(MarcaBuscar) &&
+                                                        comp.getTamano() == TamanoBuscar && // Cambiado a equals para
+                                                                                            // evitar problemas de
+                                                                                            // comparación
+                                                        comp.getPrecio() == PrecioBuscar &&
+                                                        comp.getSistemaOperativo().equalsIgnoreCase(SOBuscar) &&
+                                                        comp.getProcesador().equalsIgnoreCase(ProcesadorBuscar)) {
+                                                    computadorAsignado = comp;
+                                                    serialAsignado = comp.getSerial(); // Asigna el serial aquí
+                                                    break; // Salir del bucle si se encuentra un computador
+                                                }
+                                            }
+
+                                            // Verificar si se encontró un computador
+                                            if (computadorAsignado != null) {
+                                                System.out.println("El computador asignado es: ");
+                                                System.out.println("Serial: " + computadorAsignado.getSerial());
+                                                System.out.println("Marca: " + computadorAsignado.getMarca());
+                                                System.out.println("Tamaño: " + computadorAsignado.getTamano());
+                                                System.out.println("Precio: " + computadorAsignado.getPrecio());
+                                                System.out.println("Sistema operativo: "
+                                                        + computadorAsignado.getSistemaOperativo());
+                                                System.out.println("Procesador: " + computadorAsignado.getProcesador());
+                                                System.out.println("------------------------------- \n");
+
+                                                // Eliminar el computador de la lista
+                                                listacomp.remove(computadorAsignado);
+
+                                                // Actualizar el serial del estudiante
+                                                for (prestamoseingenieria estudiante : listaeing) {
+                                                    if (estudiante.getCedula().equals(CedulaBuscarb)) { // Asegúrate de
+                                                                                                        // tener la
+                                                                                                        // cédula del
+                                                                                                        // estudiante
+                                                        estudiante.setSerial(serialAsignado); // Asignar el serial del
+                                                                                              // computador al
+                                                                                              // estudiante
+                                                        System.out.println(
+                                                                "El serial del computador asignado al estudiante es: "
+                                                                        + serialAsignado);
+                                                        break; // Salir del bucle una vez que se actualiza el estudiante
+                                                    }
+                                                }
+
+                                                // Exportar lista de estudiantes
+                                                listaeing = objMetodoseing.ExportarArchivo(listaeing);
+
+                                            } else {
+                                                System.out.println(
+                                                        "No se encontró un computador que coincida con las características ingresadas.\n");
+                                            }
                                         }
                                         break;
 
@@ -257,22 +270,31 @@ public class Principal {
                                                     Op = sc.nextInt();
 
                                                     switch (Op) {
+
                                                         case 1:
+                                                            // Buscar el préstamo asociado a la cédula
+                                                            prestamoseingenieria prestamoEncontradob = objMetodoseing.Buscar(listaeing, cedulaBuscar); // Asegúrate de
+                                                                                                      // haber
+                                                                                                      // encontrado el
+                                                                                                      // préstamo
+                                                                                                      // previamente
+
                                                             // Buscar el computador asignado en la lista de computadores
                                                             // usando el serial
                                                             computadores equipoADevolver = null;
                                                             for (computadores comp : listacomp) {
                                                                 if (comp.getSerial()
-                                                                        .equals(prestamoEncontrado.getSerial())) {
+                                                                        .equals(prestamoEncontradob.getSerial())) {
                                                                     equipoADevolver = comp;
-                                                                    break;
+                                                                    break; // Salir del bucle si se encuentra el
+                                                                           // computador
                                                                 }
                                                             }
 
                                                             // Si el computador se encontró en la lista de préstamos
                                                             if (equipoADevolver != null) {
                                                                 // Remover el préstamo de la lista de ingeniería
-                                                                listaeing.remove(prestamoEncontrado); // Remover el
+                                                                listaeing.remove(prestamoEncontradob); // Remover el
                                                                                                       // préstamo
                                                                 objMetodoseing.ExportarArchivo(listaeing); // Exportar
                                                                                                            // la lista
@@ -283,12 +305,49 @@ public class Principal {
                                                                 listacomp.add(equipoADevolver);
                                                                 System.out.println(
                                                                         "El equipo ha sido devuelto al inventario.\n");
-                                                                        
+
+                                                                // Aquí puedes agregar cualquier mensaje adicional o
+                                                                // lógica necesaria
                                                             } else {
                                                                 System.out.println(
-                                                                        "Equuipo regresado.\n");
+                                                                        "No se encontró el computador asociado al préstamo.\n");
                                                             }
                                                             break;
+
+                                                        /*
+                                                         * case 1:
+                                                         * // Buscar el computador asignado en la lista de computadores
+                                                         * // usando el serial
+                                                         * computadores equipoADevolver = null;
+                                                         * for (computadores comp : listacomp) {
+                                                         * if (comp.getSerial()
+                                                         * .equals(prestamoEncontrado.getSerial())) {
+                                                         * equipoADevolver = comp;
+                                                         * break;
+                                                         * }
+                                                         * }
+                                                         * 
+                                                         * // Si el computador se encontró en la lista de préstamos
+                                                         * if (equipoADevolver != null) {
+                                                         * // Remover el préstamo de la lista de ingeniería
+                                                         * listaeing.remove(prestamoEncontrado); // Remover el
+                                                         * // préstamo
+                                                         * objMetodoseing.ExportarArchivo(listaeing); // Exportar
+                                                         * // la lista
+                                                         * // actualizada
+                                                         * 
+                                                         * // Agregar el computador de vuelta a la lista de
+                                                         * // computadores
+                                                         * listacomp.add(equipoADevolver);
+                                                         * System.out.println(
+                                                         * "El equipo ha sido devuelto al inventario.\n");
+                                                         * 
+                                                         * } else {
+                                                         * System.out.println(
+                                                         * "Equipo regresado.\n");
+                                                         * }
+                                                         * break;
+                                                         */
 
                                                         case 2:
                                                             System.out.println("Regresando...\n");

@@ -58,24 +58,14 @@ public class Metodoseing {
             sc.nextLine();
             System.out.println("\n");
 
-            System.out.println("Ingrese el serial");
-            String serial = sc.nextLine();
-            a.setSerial(serial);
-            System.out.println("\n");
+            // System.out.println("Ingrese el serial");
+            // String serial = sc.nextLine();
+            // a.setSerial(serial);
+            // System.out.println("\n");
 
             lista.add(a);
+            bandera = false;
 
-            System.out.println("Desea continuar 1: Si, 2: No");
-            while (!sc.hasNextInt()) {
-                System.out.println("Opcion no valida, por favor ingrese un número válido");
-                sc.next(); // Descartar entrada inválida
-            }
-            opt = sc.nextInt();
-            System.out.println("\n");
-
-            if (opt == 2) {
-                bandera = false; // Finalizamos el ciclo
-            }
         }
         return lista;
     }
@@ -95,9 +85,10 @@ public class Metodoseing {
         }
     }
 
-    public void ExportarArchivo(LinkedList<prestamoseingenieria> lista) {
+    public LinkedList<prestamoseingenieria> ExportarArchivo(LinkedList<prestamoseingenieria> lista) {
         ExportarArchivoeing e = new ExportarArchivoeing();
         e.exportarArchivo(lista);
+        return lista;
     }
 
     public LinkedList<prestamoseingenieria> ImportarArchivo() {

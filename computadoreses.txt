@@ -12,5 +12,5 @@ Marca:  acer
 Tamano:  1234.0
 Precio:  180.0
 SistemaOperativo:  Windows 10
-Procesador:  Intel Core i7
+Procesador:  Intel Core i5
 ---------------------------------------

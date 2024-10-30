@@ -176,7 +176,7 @@ public class computadores {
                         Procesador = "AMD Ryzen";
                         break;
                     case 2:
-                        Procesador = "Intel® Core™ i5";
+                        Procesador = "Intel Core i5";
                         break;
                     default:
                         System.out.println("Opción inválida, ingrese 1 o 2\n");
