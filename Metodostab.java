@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Metodostab {
     public LinkedList<Tableta> LlenarLista(LinkedList<Tableta> lista) {
@@ -9,61 +10,50 @@ public class Metodostab {
         Scanner sc = new Scanner(System.in);
 
         while (bandera) {
-            System.out.println("Ingrese el serial");
-            String serial = sc.nextLine();
 
-            Tableta a = m.Buscar(lista, serial);
+            UUID SerialUUID = UUID.randomUUID();
+            String Serial = SerialUUID.toString().substring(0, 10);
+
+            Tableta a = m.Buscar(lista, Serial);
             if (a != null && a.getSerial() != null) {
                 System.out.println("El registro ya existe, por favor ingrese otro serial");
                 continue;
             }
 
             a = new Tableta();
-            a.setSerial(serial);
-            System.out.println("\n");
+            a.setSerial(Serial);
+            // System.out.println("\n");
 
             System.out.println("Ingrese la marca");
-            String marca = sc.nextLine();
-            a.setMarca(marca);
-            System.out.println("\n");
+            a.setMarca(sc.nextLine());
+            // System.out.println("\n");
 
             System.out.println("Ingrese el tamaño");
             while (!sc.hasNextFloat()) {
                 System.out.println("Opcion no valida, por favor ingrese un tamaño válido");
                 sc.next();
             }
-            float tamano = sc.nextFloat();
-            a.setTamano(tamano);
-            System.out.println(tamano);
+            a.setTamano(sc.nextFloat());
             sc.nextLine();
-            System.out.println("\n");
 
             System.out.println("Ingrese el precio");
             while (!sc.hasNextFloat()) {
                 System.out.println("Opcion no valida, por favor ingrese un precio válido");
                 sc.next();
             }
-            float precio = sc.nextFloat();
-            a.setPrecio(precio);
-            System.out.println(precio);
+            a.setPrecio(sc.nextFloat());
             sc.nextLine();
-            System.out.println("\n");
 
             System.out.println("Ingrese el almacenamiento");
-            String almacenamiento = sc.nextLine();
-            a.setAlmacenamiento(almacenamiento);
-            System.out.println("\n");
+            a.setAlmacenamiento(sc.nextLine());
 
-            System.out.println("Ingrese el tamaño");
+            System.out.println("Ingrese el peso");
             while (!sc.hasNextFloat()) {
                 System.out.println("Opcion no valida, por favor ingrese un tamaño válido");
                 sc.next();
             }
-            float peso = sc.nextFloat();
-            a.setPeso(peso);
-            System.out.println(peso);
+            a.setPeso(sc.nextFloat());
             sc.nextLine();
-            System.out.println("\n");
 
             lista.add(a);
 
@@ -73,8 +63,7 @@ public class Metodostab {
                 sc.next();
             }
             opt = sc.nextInt();
-            System.out.println("\n");
-
+            sc.nextLine();
             if (opt == 2) {
                 bandera = false;
             }
@@ -84,13 +73,13 @@ public class Metodostab {
     }
 
     public void MostrarLista(LinkedList<Tableta> lista) {
-        for (Tableta computadores : lista) {
-            System.out.println("Serial: " + " " + computadores.getSerial());
-            System.out.println("Marca: " + " " + computadores.getMarca());
-            System.out.println("Tamaño: " + " " + computadores.getPeso());
-            System.out.println("Precio: " + " " + computadores.getPrecio());
-            System.out.println("Almacenamiento: " + " " + computadores.getAlmacenamiento());
-            System.out.println("Peso: " + " " + computadores.getPeso());
+        for (Tableta tableta : lista) {
+            System.out.println("Serial: " + " " + tableta.getSerial());
+            System.out.println("Marca: " + " " + tableta.getMarca());
+            System.out.println("Tamaño: " + " " + tableta.getPeso());
+            System.out.println("Precio: " + " " + tableta.getPrecio());
+            System.out.println("Almacenamiento: " + " " + tableta.getAlmacenamiento());
+            System.out.println("Peso: " + " " + tableta.getPeso());
 
             System.out.println("------------------------------- \n");
 
@@ -109,9 +98,9 @@ public class Metodostab {
     }
 
     public Tableta Buscar(LinkedList<Tableta> lista, String serial) {
-        for (Tableta comp : lista) {
-            if (comp.getSerial().equals(serial)) {
-                return comp;
+        for (Tableta tab : lista) {
+            if (tab.getSerial().equals(serial)) {
+                return tab;
             }
         }
         return null;

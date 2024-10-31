@@ -6,7 +6,7 @@ public class Metodoseing {
         // LinkedList<prestamoseingenieria> lista = new LinkedList<>();
         boolean bandera = true;
         Metodoseing m = new Metodoseing();
-        int opt = 0;
+        
         Scanner sc = new Scanner(System.in);
         while (bandera) {
             // new prestamoseingenieria();

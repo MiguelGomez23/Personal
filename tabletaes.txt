@@ -11,7 +11,7 @@ Serial:  PAO77854LL
 Marca:  mac
 Tamano:  15.4
 Precio:  180.0
-Almacenamiento:  128 GB
+Almacenamiento:  1 TB
 Peso:  14.85
 ---------------------------------------
 Serial:  5869

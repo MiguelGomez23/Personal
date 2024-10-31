@@ -1,4 +1,4 @@
-import java.io.Serial;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -50,7 +50,97 @@ public class Principal {
                                     case 1:
                                         System.out.println("Solicitar préstamo de equipo.\n");
                                         listaedi = objMetodosedi.ImportarArchivo();
+                                        
+                                        Metodosedi objMetodosedib = new Metodosedi();
+                                        Tableta tb = new Tableta();
+                                        String CedulaBuscard;
+
+                                        System.out.println("Ingrese su cédula");
+                                        CedulaBuscard = sc.next();
+                                        prestamosediseño resultadi = objMetodosedib.Buscar(listaedi, CedulaBuscard);
+                                       
+                                        System.out.println();
+
+                                        if (resultadi != null) {
+                                            System.out
+                                                    .println("Ya hay un préstamo activo con esta cédula\n");
+                                        } else {
+                                            System.out.println("La cédula no tiebe préstamo activo, ingrésela de nuevo para continuar el "
+                                            + "proceso del préstamo");
+                                            listaedi = objMetodosedi.LlenarLista(listaedi);
+
+                                            tb.SeleccionarMarca();
+                                            String MarcaBuscar = tb.getMarca();
+
+                                            tb.Seleccionartamaño();
+                                            Float TamanoBuscar = tb.getTamano();
+
+                                            tb.SeleccionarPrecio();
+                                            Float PrecioBuscar = tb.getPrecio();
+
+                                            tb.SeleccionarAlmacenamiento();
+                                            String AlmacenamientoBuscar = tb.getAlmacenamiento();
+
+                                            tb.SeleccionarPeso();
+                                            Float PesoBuscar = tb.getPeso();
+
+                                            Tableta tabletaAsignada = null;
+                                            String serialAsignado = null; // Variable para almacenar el serial del
+                                                                          // computador asignado
+
+                                            // Buscar el computador que coincida con las características
+                                            for (Tableta tab : listatab) {
+                                                if (tab.getMarca().equalsIgnoreCase(MarcaBuscar) &&
+                                                        tab.getTamano() == TamanoBuscar && // Cambiado a equals para
+                                                                                            // evitar problemas de
+                                                                                            // comparación
+                                                        tab.getPrecio() == PrecioBuscar &&
+                                                        tab.getAlmacenamiento().equalsIgnoreCase(AlmacenamientoBuscar) &&
+                                                        tab.getPeso() == PesoBuscar) {
+                                                    tabletaAsignada = tab;
+                                                    serialAsignado = tab.getSerial(); // Asigna el serial aquí
+                                                    break; // Salir del bucle si se encuentra un computador
+                                                }
+                                            }
+
+                                            // Verificar si se encontró un computador
+                                            if (tabletaAsignada != null) {
+                                                System.out.println("El computador asignado es: ");
+                                                System.out.println("Serial: " + tabletaAsignada.getSerial());
+                                                System.out.println("Marca: " + tabletaAsignada.getMarca());
+                                                System.out.println("Tamaño: " + tabletaAsignada.getTamano());
+                                                System.out.println("Precio: " + tabletaAsignada.getPrecio());
+                                                System.out.println("Almacenamiento: " + tabletaAsignada.getAlmacenamiento());
+                                                System.out.println("Peso: " + tabletaAsignada.getPeso());
+                                                System.out.println("------------------------------- \n");
+
+                                                // Eliminar el computador de la lista
+                                                listatab.remove(tabletaAsignada);
+
+                                                // Actualizar el serial del estudiante
+                                                for (prestamosediseño estudiante : listaedi) {
+                                                    if (estudiante.getCedula().equals(CedulaBuscard)) {
+                                                        estudiante.setSerial(serialAsignado); // Asignar el serial del
+                                                                                              // computador al
+                                                                                              // estudiante
+                                                        System.out.println(
+                                                                "El serial del computador asignado al estudiante es: "
+                                                                        + serialAsignado);
+                                                        break; // Salir del bucle una vez que se actualiza el estudiante
+                                                    }
+                                                }
+
+                                                // Exportar lista de estudiantes
+                                                 objMetodosedi.ExportarArchivo(listaedi);
+
+                                            } else {
+                                                System.out.println(
+                                                        "No se encontró un computador que coincida con las características ingresadas.\n");
+                                            }
+                                        }
                                         break;
+
+                                       
 
                                     case 2:
                                         System.out.println("Modificar préstamo de equipo.\n");
@@ -149,7 +239,6 @@ public class Principal {
                                         CedulaBuscarb = sc.next();
                                         prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing, CedulaBuscarb);
                                         System.out.println();
-                                        
 
                                         if (resulta != null) {
                                             System.out
@@ -208,10 +297,7 @@ public class Principal {
 
                                                 // Actualizar el serial del estudiante
                                                 for (prestamoseingenieria estudiante : listaeing) {
-                                                    if (estudiante.getCedula().equals(CedulaBuscarb)) { // Asegúrate de
-                                                                                                        // tener la
-                                                                                                        // cédula del
-                                                                                                        // estudiante
+                                                    if (estudiante.getCedula().equals(CedulaBuscarb)) {
                                                         estudiante.setSerial(serialAsignado); // Asignar el serial del
                                                                                               // computador al
                                                                                               // estudiante
@@ -222,7 +308,6 @@ public class Principal {
                                                     }
                                                 }
 
-                                                // Exportar lista de estudiantes
                                                 listaeing = objMetodoseing.ExportarArchivo(listaeing);
 
                                             } else {
@@ -273,14 +358,9 @@ public class Principal {
 
                                                         case 1:
                                                             // Buscar el préstamo asociado a la cédula
-                                                            prestamoseingenieria prestamoEncontradob = objMetodoseing.Buscar(listaeing, cedulaBuscar); // Asegúrate de
-                                                                                                      // haber
-                                                                                                      // encontrado el
-                                                                                                      // préstamo
-                                                                                                      // previamente
-
-                                                            // Buscar el computador asignado en la lista de computadores
-                                                            // usando el serial
+                                                            prestamoseingenieria prestamoEncontradob = objMetodoseing
+                                                                    .Buscar(listaeing, cedulaBuscar); // Asegúrate de
+                                                         
                                                             computadores equipoADevolver = null;
                                                             for (computadores comp : listacomp) {
                                                                 if (comp.getSerial()
@@ -291,23 +371,16 @@ public class Principal {
                                                                 }
                                                             }
 
-                                                            // Si el computador se encontró en la lista de préstamos
+                                                       
                                                             if (equipoADevolver != null) {
-                                                                // Remover el préstamo de la lista de ingeniería
-                                                                listaeing.remove(prestamoEncontradob); // Remover el
-                                                                                                      // préstamo
-                                                                objMetodoseing.ExportarArchivo(listaeing); // Exportar
-                                                                                                           // la lista
-                                                                                                           // actualizada
-
-                                                                // Agregar el computador de vuelta a la lista de
-                                                                // computadores
+                                                                
+                                                                listaeing.remove(prestamoEncontradob); 
+                                                                objMetodoseing.ExportarArchivo(listaeing); 
                                                                 listacomp.add(equipoADevolver);
                                                                 System.out.println(
                                                                         "El equipo ha sido devuelto al inventario.\n");
 
-                                                                // Aquí puedes agregar cualquier mensaje adicional o
-                                                                // lógica necesaria
+                                                     
                                                             } else {
                                                                 System.out.println(
                                                                         "No se encontró el computador asociado al préstamo.\n");
@@ -371,13 +444,11 @@ public class Principal {
                                         listacomp = objMetodoscomp.ImportarArchivo();
                                         Metodoscomp objMetodoscompb = new Metodoscomp();
                                         String SerialBuscarb = "";
-                                        System.out.println("Ingrese la serial que desea buscar");
+                                        System.out.println("Ingrese el serial que desea buscar");
                                         SerialBuscarb = sc.next();
                                         computadores result = objMetodoscompb.Buscar(listacomp, SerialBuscarb);
 
-                                        if (result == null) {
-                                            System.out.println("El registro no existe\n");
-                                        } else {
+                                        if (result != null) {
 
                                             System.out.println();
                                             System.out.println("Serial: " + " " + result.getSerial());
@@ -389,6 +460,8 @@ public class Principal {
                                             System.out.println("Procesador: " + " " + result.getProcesador());
                                             System.out.println();
                                             System.out.println("------------------------------- \n");
+                                        } else {
+                                            System.out.println("El registro no existe\n");
                                         }
                                         break;
 

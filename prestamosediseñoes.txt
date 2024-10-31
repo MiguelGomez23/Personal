@@ -22,3 +22,19 @@ Modalidad de estudio:  pre
 Cantidad de asignaturas:  5
 Serial:  142666
 ---------------------------------------
+Cedula:  1
+Nombre:  s
+Apellido:  s
+Telefono:  44
+Modalidad de estudio:  p
+Cantidad de asignaturas:  8
+Serial:  null
+---------------------------------------
+Cedula:  14
+Nombre:  pp
+Apellido:  oo
+Telefono:  77
+Modalidad de estudio:  p
+Cantidad de asignaturas:  2
+Serial:  PAO77854LL
+---------------------------------------

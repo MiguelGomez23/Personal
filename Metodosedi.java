@@ -60,19 +60,8 @@ public class Metodosedi {
 
             // Agregar a la lista
             lista.add(objPrestamosediseño);
+            bandera = false;
 
-            // Preguntar si desea continuar
-            System.out.println("Desea continuar 1: Si, 2: No");
-            while (!sc.hasNextInt()) {
-                System.out.println("Opcion no valida, por favor ingrese un número válido");
-                sc.next(); // Descartar entrada inválida
-            }
-            opt = sc.nextInt();
-            System.out.println("\n");
-
-            if (opt == 2) {
-                bandera = false; // Finalizamos el ciclo
-            }
         }
         return lista;
     }
@@ -104,9 +93,9 @@ public class Metodosedi {
     }
 
     public prestamosediseño Buscar(LinkedList<prestamosediseño> lista, String Cedula) {
-        for (prestamosediseño comp : lista) {
-            if (comp.getCedula().equals(Cedula)) {
-                return comp; // Retorna el objeto encontrado
+        for (prestamosediseño dis : lista) {
+            if (dis.getCedula().equals(Cedula)) {
+                return dis; // Retorna el objeto encontrado
             }
         }
         return null; // Retorna null si no se encuentra

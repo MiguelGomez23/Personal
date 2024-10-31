@@ -62,10 +62,12 @@ public class Tableta {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Ingrese el tamaño");
+
         while (!sc.hasNextFloat()) {
             System.out.println("Opcion no valida, por favor ingrese un tamaño válido");
             sc.next();
         }
+        Tamano = sc.nextFloat();
         System.out.println("El tamaño de su tableta es: " + Tamano);
         System.out.println();
     }
@@ -79,6 +81,7 @@ public class Tableta {
             System.out.println("Opcion no valida, por favor ingrese un precio válido");
             sc.next(); // Descartar entrada inválida
         }
+        Precio = sc.nextFloat();
         System.out.println("El precio de su tableta es: " + Precio);
         System.out.println();
     }
@@ -93,31 +96,58 @@ public class Tableta {
             System.out.println("1. 256 GB");
             System.out.println("2. 512 GB");
             System.out.println("3. 1 TB");
+            System.out.println("4. 128 GB");
             System.out.println();
             if (scanner.hasNextInt()) {
                 opt = scanner.nextInt();
                 switch (opt) {
                     case 1:
                         Almacenamiento = "256 GB";
+                         
                         break;
                     case 2:
                         Almacenamiento = "512 GB";
+                            
                         break;
                     case 3:
                         Almacenamiento = "1 TB";
+                           
+                        break;
+                    case 4:
+                        Almacenamiento = "128 GB";
+                             
                         break;
                     default:
-                        System.out.println("Opción inválida,por favor eliga una opción de 1 a 3\n");
+                        System.out.println("Opción inválida,por favor eliga una opción de 1 a 4\n");
+                          
                         break;
+
+                
+
                 }
             } else {
                 System.out.println("Por favor, ingrese un número entero.\n");
                 scanner.next();
             }
-        } while (opt < 1 || opt > 3);
+        } while (opt < 1 || opt > 4);
 
         // scanner.close();
         System.out.println("Almacenamiento seleccionado: " + Almacenamiento);
+        System.out.println();
+    }
+
+    public void SeleccionarPeso() {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese el peso");
+        while (!sc.hasNextFloat()) {
+            System.out.println("Opcion no valida, por favor ingrese un peso válido");
+            sc.next(); // Descartar entrada inválida
+        }
+        Peso = sc.nextFloat();
+        System.out.println("El peso de su tableta es: " + Peso);
+        System.out.println();
     }
 
     public void SeleccionarMarca() {
@@ -127,21 +157,25 @@ public class Tableta {
         int opt = 0;
         do {
             System.out.println("Seleccione la marca que desea:");
-            System.out.println("1. Acer");
+            System.out.println("1. Mac");
             System.out.println("2. Dell");
             System.out.println("3. Asus");
+            System.out.println("4. Lenovo");
             System.out.println();
             if (scanner.hasNextInt()) {
                 opt = scanner.nextInt();
                 switch (opt) {
                     case 1:
-                        Marca = "Acer";
+                        Marca = "Mac";
                         break;
                     case 2:
                         Marca = "Dell";
                         break;
                     case 3:
                         Marca = "Asus";
+                        break;
+                    case 4:
+                        Marca = "Lenovo";
                         break;
                     default:
                         System.out.println("Opción inválida, por favor ingrese del 1 al 3");
