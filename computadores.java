@@ -115,7 +115,7 @@ public class computadores {
         System.out.println("Ingrese el precio");
         while (!sc.hasNextFloat()) {
             System.out.println("Opcion no valida, por favor ingrese un precio válido\n");
-            sc.next(); // Descartar entrada inválida
+            sc.next();
         }
         Precio = sc.nextFloat();
         System.out.println("El precio de su computador es: " + Precio);
