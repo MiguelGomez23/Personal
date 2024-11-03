@@ -1,6 +1,6 @@
 Cedula:  1025558996
-Nombre:  Esteban
-Apellido:  Benitez
+Nombre:  pedro
+Apellido:  Lopera
 Telefono:  3021458799
 Numero de semestre:  6
 Promedio:  3.8

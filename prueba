@@ -1,0 +1,52 @@
+case 1:
+
+                                                    objMetodosedi.ImportarArchivo();
+                                                    Metodosedi nombre = new Metodosedi();
+                                                    System.out.println("Ingrese el nombre que desea buscar");
+                                                    nombrebuscar = sc.next();
+                                                    listaedi = nombre.ModificarNombre(nombrebuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+                                                    break;
+
+                                                case 2:
+                                                    objMetodosedi.ImportarArchivo();
+                                                    Metodosedi apellido = new Metodosedi();
+                                                    System.out.println("Ingrese el apellido que desea buscar");
+                                                    apellidobuscar = sc.next();
+                                                    listaedi = apellido.ModificarApellido(apellidobuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+
+                                                case 3:
+                                                    objMetodosedi.ImportarArchivo();
+                                                    Metodosedi telefono = new Metodosedi();
+                                                    System.out.println("Ingrese el telefono que desea buscar");
+                                                    telefonobuscar = sc.next();
+                                                    listaedi = telefono.ModificarTelefono(telefonobuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+                                                case 4:
+                                                    objMetodosedi.ImportarArchivo();
+                                                    Metodosedi num = new Metodosedi();
+                                                    System.out
+                                                            .println("Ingrese el numero de semestre que desea buscar");
+                                                    numbuscar = sc.nextInt();
+                                                    listaedi = num.ModificarModalidadEstudio(modbuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+                                                case 5:
+                                                     objMetodosedi.ImportarArchivo();
+                                                    Metodosedi num = new Metodosedi();
+                                                    System.out
+                                                            .println("Ingrese el numero de semestre que desea buscar");
+                                                    numbuscar = sc.nextInt();
+                                                    listaedi = num.ModificarCantidadAsignaturas(cantidadbuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);

@@ -65,4 +65,9 @@ public class EstudiantesIngenieria {
     public void setSerial(String serial) {
         Serial = serial;
     }
+
+    public String toString() {
+        return "Nombre: " + Nombre + ", Apellido: " + Apellido + ", Teléfono: " + Telefono +
+               ", Promedio: " + Promedio + ", Número de semestre: " + NumSemestre + ", Serial: " + Serial;
+    }
 }

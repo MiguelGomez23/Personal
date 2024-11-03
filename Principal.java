@@ -145,32 +145,104 @@ public class Principal {
                                         break;
 
                                     case 2:
-                                        System.out.println("Modificar préstamo de equipo.\n");
-                                        listaedi = objMetodosedi.ImportarArchivo(listaedi);
-                                        Metodosedi objmetodos = new Metodosedi();
-                                        String SerialBuscar = "";
-                                        System.out.println("Ingrese la cédula");
-                                        SerialBuscar = sc.next();
-                                        System.out.println();
-                                        prestamosediseño resulta = objmetodos.Buscar(listaedi, SerialBuscar);
 
-                                        if (resulta == null) {
-                                            System.out.println();
-                                            System.out.println("El registro no existe");
-                                            System.out.println();
-                                        } else {
-                                            System.out.println("Cédula: " + resulta.getCedula());
-                                            System.out.println("Nombre: " + resulta.getNombre());
-                                            System.out.println("Apellido: " + resulta.getApellido());
-                                            System.out.println("Teléfono: " + resulta.getTelefono());
-                                            System.out
-                                                    .println("Modalidad de estudio: " + resulta.getModalidadEstudio());
-                                            System.out.println(
-                                                    "Cantidad de Asignaturas: " + resulta.getCantidadAsignaturas());
-                                            System.out.println("Serial: " + resulta.getSerial());
-                                            System.out.println("------------------------------- \n");
-                                        }
+                                        listaedi = objMetodosedi.ImportarArchivo(listaedi);
+
                                         objMetodosedi.ExportarArchivo(listaedi);
+
+                                        String nombrebuscar = "";
+                                        String apellidobuscar = "";
+                                        String telefonobuscar = "";
+                                        String modbuscar = "";
+                                        int cantidadbuscar = 0;
+
+                                        int oppt = 0;
+
+                                        do {
+                                            System.out.println("Seleccione el registro que quiere modificar: ");
+                                            System.out.println("1. Nombre.");
+                                            System.out.println("2. Apellido.");
+                                            System.out.println("3. Teléfono.");
+                                            System.out.println("4. Modalidad de estudio.");
+                                            System.out.println("5. Cantidad de asignaturas.");
+
+                                            System.out.println("0. Salir."); // Opción para salir del bucle
+
+                                            // Validar que se ha ingresado un número
+                                            while (!sc.hasNextInt()) {
+                                                System.out.println("Por favor, ingrese un número válido:");
+                                                sc.next(); // Limpiar el buffer
+                                            }
+
+                                            oppt = sc.nextInt();
+
+                                            switch (oppt) {
+
+                                                case 0:
+                                                    System.out.println("Saliendo");
+                                                    break;
+
+                                                case 1:
+
+                                                    objMetodosedi.ImportarArchivo(listaedi);
+                                                    Metodosedi nombre = new Metodosedi();
+                                                    System.out.println("Ingrese el nombre que desea buscar");
+                                                    nombrebuscar = sc.next();
+                                                    listaedi = nombre.ModificarNombre(nombrebuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+                                                    break;
+
+                                                case 2:
+                                                    objMetodosedi.ImportarArchivo(listaedi);
+                                                    Metodosedi apellido = new Metodosedi();
+                                                    System.out.println("Ingrese el apellido que desea buscar");
+                                                    apellidobuscar = sc.next();
+                                                    listaedi = apellido.ModificarApellido(apellidobuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+
+                                                case 3:
+                                                    objMetodosedi.ImportarArchivo(listaedi);
+                                                    Metodosedi telefono = new Metodosedi();
+                                                    System.out.println("Ingrese el telefono que desea buscar");
+                                                    telefonobuscar = sc.next();
+                                                    listaedi = telefono.ModificarTelefono(telefonobuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+                                                case 4:
+                                                    objMetodosedi.ImportarArchivo(listaedi);
+                                                    Metodosedi mod = new Metodosedi();
+                                                    System.out
+                                                            .println("Ingrese la modalidad de estudio que desea buscar");
+                                                    modbuscar = sc.next();
+                                                    listaedi = mod.ModificarModalidadEstudio(modbuscar, listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+                                                case 5:
+                                                    objMetodosedi.ImportarArchivo(listaedi);
+                                                    Metodosedi cantidad = new Metodosedi();
+                                                    System.out
+                                                            .println("Ingrese la cantidad de asignaturas que desea buscar");
+                                                    cantidadbuscar = sc.nextInt();
+                                                    listaedi = cantidad.ModificarCantidadAsignaturas(cantidadbuscar,
+                                                            listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+
+                                                    break;
+                                                default:
+                                                    System.out.println("Opción no válida. Intente de nuevo.");
+                                                    break;
+                                            }
+
+                                        } while (oppt != 0);
                                         break;
 
                                     case 3:
@@ -231,13 +303,13 @@ public class Principal {
 
                                                                 if (equipoADevolver != null) {
                                                                     listaedi.remove(prestamoEncontradob); // Remover el
-                                                                    objMetodosedi.ImportarArchivo(listaedi);                                      // préstamo
+                                                                    objMetodosedi.ImportarArchivo(listaedi); // préstamo
                                                                     objMetodosedi.ExportarArchivo(listaedi); // Exportar
-                                                                                                                 // la
+                                                                                                             // la
                                                                                                              // lista
                                                                                                              // actualizada
                                                                     listatab.add(equipoADevolver); // Agregar el equipo
-                                                                    
+
                                                                     System.out.println(
                                                                             "El equipo ha sido devuelto al inventario.\n");
                                                                 } else {
@@ -422,8 +494,98 @@ public class Principal {
                                         break;
 
                                     case 2:
-                                        System.out.println("Modificar préstamo de equipo.\n");
                                         listaeing = objMetodoseing.ImportarArchivo();
+                                        String nombrebuscar = "";
+                                        String apellidobuscar = "";
+                                        String telefonobuscar = "";
+                                        int numbuscar = 0;
+                                        Float promediobuscar = 0.0f;
+
+                                        int oppt = 0;
+
+                                        do {
+                                            System.out.println("Seleccione el registro que quiere modificar: ");
+                                            System.out.println("1. Nombre.");
+                                            System.out.println("2. Apellido.");
+                                            System.out.println("3. Teléfono.");
+                                            System.out.println("4. Promedio.");
+                                            System.out.println("5. Número de semestre.");
+
+                                            System.out.println("0. Salir."); // Opción para salir del bucle
+
+                                            // Validar que se ha ingresado un número
+                                            while (!sc.hasNextInt()) {
+                                                System.out.println("Por favor, ingrese un número válido:");
+                                                sc.next(); // Limpiar el buffer
+                                            }
+
+                                            oppt = sc.nextInt();
+
+                                            switch (oppt) {
+
+                                                case 0:
+                                                    System.out.println("Saliendo");
+                                                    break;
+
+                                                case 1:
+
+                                                    objMetodoseing.ImportarArchivo();
+                                                    Metodoseing nombre = new Metodoseing();
+                                                    System.out.println("Ingrese el nombre que desea buscar");
+                                                    nombrebuscar = sc.next();
+                                                    listaeing = nombre.ModificarNombre(nombrebuscar, listaeing);
+                                                    objMetodoseing.MostrarLista(listaeing);
+                                                    objMetodoseing.ExportarArchivo(listaeing);
+                                                    break;
+
+                                                case 2:
+                                                    objMetodoseing.ImportarArchivo();
+                                                    Metodoseing apellido = new Metodoseing();
+                                                    System.out.println("Ingrese el apellido que desea buscar");
+                                                    apellidobuscar = sc.next();
+                                                    listaeing = apellido.ModificarApellido(apellidobuscar, listaeing);
+                                                    objMetodoseing.MostrarLista(listaeing);
+                                                    objMetodoseing.ExportarArchivo(listaeing);
+
+                                                    break;
+
+                                                case 3:
+                                                    objMetodoseing.ImportarArchivo();
+                                                    Metodoseing telefono = new Metodoseing();
+                                                    System.out.println("Ingrese el telefono que desea buscar");
+                                                    telefonobuscar = sc.next();
+                                                    listaeing = telefono.ModificarTelefono(telefonobuscar, listaeing);
+                                                    objMetodoseing.MostrarLista(listaeing);
+                                                    objMetodoseing.ExportarArchivo(listaeing);
+
+                                                    break;
+                                                case 4:
+                                                    objMetodoseing.ImportarArchivo();
+                                                    Metodoseing num = new Metodoseing();
+                                                    System.out
+                                                            .println("Ingrese el numero de semestre que desea buscar");
+                                                    numbuscar = sc.nextInt();
+                                                    listaeing = num.ModificarNumSemestre(numbuscar, listaeing);
+                                                    objMetodoseing.MostrarLista(listaeing);
+                                                    objMetodoseing.ExportarArchivo(listaeing);
+
+                                                    break;
+                                                case 5:
+                                                    objMetodoseing.ImportarArchivo();
+                                                    Metodoseing promedio = new Metodoseing();
+                                                    System.out.println("Ingrese el promedio que desea buscar");
+                                                    promediobuscar = sc.nextFloat();
+                                                    listaeing = promedio.ModificarPromedio(promediobuscar, listaeing);
+                                                    objMetodoseing.MostrarLista(listaeing);
+                                                    objMetodoseing.ExportarArchivo(listaeing);
+
+                                                    break;
+                                                default:
+                                                    System.out.println("Opción no válida. Intente de nuevo.");
+                                                    break;
+                                            }
+
+                                        } while (oppt != 0);
                                         break;
 
                                     case 3:

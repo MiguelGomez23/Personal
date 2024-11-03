@@ -101,4 +101,222 @@ public class Metodosedi {
         return null; // Retorna null si no se encuentra
     }
 
+    public prestamosediseño BuscarNombre(LinkedList<prestamosediseño> lista, String nombre) {
+        for (prestamosediseño ing : lista) {
+            // Usa equalsIgnoreCase para ignorar diferencias en mayúsculas y minúsculas
+            if (ing.getNombre().equalsIgnoreCase(nombre)) {
+                return ing;
+            }
+        }
+        return null; // Retorna null si no se encuentra el objeto
+    }
+    
+    public LinkedList<prestamosediseño> ModificarNombre(String nombre, LinkedList<prestamosediseño> listaedi) {
+        Metodosedi BN = new Metodosedi();
+        Scanner sc = new Scanner(System.in);
+    
+        // Buscar el objeto con el nombre proporcionado
+        prestamosediseño buscarNombre = BN.BuscarNombre(listaedi, nombre);
+    
+        if (buscarNombre != null) { // Verifica si se encontró el objeto
+            System.out.println("Registro encontrado:");
+            System.out.println();
+            System.out.println("Nombre actual: " + buscarNombre.getNombre());
+            System.out.println();
+    
+            // Solicitar nuevo nombre al usuario
+            System.out.println("Ingrese el nuevo nombre:");
+            String nuevoNombre = sc.nextLine();
+            System.out.println();
+    
+            // Actualizar el nombre del objeto encontrado
+            buscarNombre.setNombre(nuevoNombre);
+            System.out.println("Nombre modificado correctamente a: " + buscarNombre.getNombre());
+            System.out.println();
+        } else {
+            System.out.println("Registro no encontrado.");
+            System.out.println();
+        }
+    
+        return listaedi;
+    }
+    
+    //
+    //
+    //
+    public prestamosediseño BuscarApellido(LinkedList<prestamosediseño> lista, String Apellido) {
+        for (prestamosediseño ing : lista) {
+            // Usa equalsIgnoreCase para ignorar diferencias en mayúsculas y minúsculas
+            if (ing.getApellido().equalsIgnoreCase(Apellido)) {
+                return ing;
+            }
+        }
+        return null; // Retorna null si no se encuentra el objeto
+    }
+    
+    public LinkedList<prestamosediseño> ModificarApellido(String Apellido, LinkedList<prestamosediseño> listaedi) {
+        Metodosedi BN = new Metodosedi();
+        Scanner sc = new Scanner(System.in);
+    
+        // Buscar el objeto con el Apellido proporcionado
+        prestamosediseño buscarApellido = BN.BuscarApellido(listaedi, Apellido);
+    
+        if (buscarApellido != null) { // Verifica si se encontró el objeto
+            System.out.println("Registro encontrado:");
+            System.out.println();
+            System.out.println("Apellido actual: " + buscarApellido.getApellido());
+            System.out.println();
+    
+            // Solicitar nuevo Apellido al usuario
+            System.out.println("Ingrese el nuevo Apellido:");
+            String nuevoApellido = sc.nextLine();
+            System.out.println();
+    
+            // Actualizar el Apellido del objeto encontrado
+            buscarApellido.setApellido(nuevoApellido);
+            System.out.println("Apellido modificado correctamente a: " + buscarApellido.getApellido());
+            System.out.println();
+        } else {
+            System.out.println("Registro no encontrado.");
+            System.out.println();
+        }
+    
+        return listaedi;
+    }
+    
+    //
+    //
+    //
+
+    public prestamosediseño BuscarTelefono(LinkedList<prestamosediseño> lista, String Telefono) {
+        for (prestamosediseño ing : lista) {
+            // Usa equalsIgnoreCase para ignorar diferencias en mayúsculas y minúsculas
+            if (ing.getTelefono().equalsIgnoreCase(Telefono)) {
+                return ing;
+            }
+        }
+        return null; // Retorna null si no se encuentra el objeto
+    }
+    
+    public LinkedList<prestamosediseño> ModificarTelefono(String Telefono, LinkedList<prestamosediseño> listaedi) {
+        Metodosedi BN = new Metodosedi();
+        Scanner sc = new Scanner(System.in);
+    
+        // Buscar el objeto con el Telefono proporcionado
+        prestamosediseño buscarTelefono = BN.BuscarTelefono(listaedi, Telefono);
+    
+        if (buscarTelefono != null) { // Verifica si se encontró el objeto
+            System.out.println("Registro encontrado:");
+            System.out.println();
+            System.out.println("Telefono actual: " + buscarTelefono.getTelefono());
+            System.out.println();
+    
+            // Solicitar nuevo Telefono al usuario
+            System.out.println("Ingrese el nuevo Telefono:");
+            String nuevoTelefono = sc.nextLine();
+            System.out.println();
+    
+            // Actualizar el Telefono del objeto encontrado
+            buscarTelefono.setTelefono(nuevoTelefono);
+            System.out.println("Telefono modificado correctamente a: " + buscarTelefono.getTelefono());
+            System.out.println();
+        } else {
+            System.out.println("Registro no encontrado.");
+            System.out.println();
+        }
+    
+        return listaedi;
+    }
+    
+    //
+    //
+    //
+
+    public prestamosediseño BuscarModalidadEstudio(LinkedList<prestamosediseño> lista, String ModalidadEstudio) {
+        for (prestamosediseño ing : lista) {
+            // Usa equalsIgnoreCase para ignorar diferencias en mayúsculas y minúsculas
+            if (ing.getModalidadEstudio().equalsIgnoreCase(ModalidadEstudio)) {
+                return ing;
+            }
+        }
+        return null; // Retorna null si no se encuentra el objeto
+    }
+    
+    public LinkedList<prestamosediseño> ModificarModalidadEstudio(String ModalidadEstudio, LinkedList<prestamosediseño> listaedi) {
+        Metodosedi BN = new Metodosedi();
+        Scanner sc = new Scanner(System.in);
+    
+        // Buscar el objeto con el ModalidadEstudio proporcionado
+        prestamosediseño buscarModalidadEstudio = BN.BuscarModalidadEstudio(listaedi, ModalidadEstudio);
+    
+        if (buscarModalidadEstudio != null) { // Verifica si se encontró el objeto
+            System.out.println("Registro encontrado:");
+            System.out.println();
+            System.out.println("La modalidad de estudio actual: " + buscarModalidadEstudio.getModalidadEstudio());
+            System.out.println();
+    
+            // Solicitar nuevo ModalidadEstudio al usuario
+            System.out.println("Ingrese la nueva modalidad de estudio:");
+            String nuevoModalidadEstudio = sc.nextLine();
+            System.out.println();
+    
+            // Actualizar el ModalidadEstudio del objeto encontrado
+            buscarModalidadEstudio.setModalidadEstudio(nuevoModalidadEstudio);
+            System.out.println("La modalidad de estudio fue modificada correctamente a: " + buscarModalidadEstudio.getModalidadEstudio());
+            System.out.println();
+        } else {
+            System.out.println("Registro no encontrado.");
+            System.out.println();
+        }
+    
+        return listaedi;
+    }
+    
+    //
+    //
+    //
+
+    public prestamosediseño BuscarCantidadAsignaturas(LinkedList<prestamosediseño> lista, int CantidadAsignaturas) {
+        for (prestamosediseño ing : lista) {
+            // Usa equalsIgnoreCase para ignorar diferencias en mayúsculas y minúsculas
+            if (ing.getCantidadAsignaturas() == CantidadAsignaturas)   {
+                return ing;
+            }
+        }
+        return null; // Retorna null si no se encuentra el objeto
+    }
+    
+    public LinkedList<prestamosediseño> ModificarCantidadAsignaturas(int CantidadAsignaturas, LinkedList<prestamosediseño> listaedi) {
+        Metodosedi BNS = new Metodosedi();
+        Scanner sc = new Scanner(System.in);
+        
+        // Buscar el objeto con el CantidadAsignaturas proporcionado
+        prestamosediseño buscarCantidadAsignaturas = BNS.BuscarCantidadAsignaturas(listaedi, CantidadAsignaturas);
+        
+        if (buscarCantidadAsignaturas != null) { // Verifica si se encontró el objeto
+            System.out.println("Registro encontrado:");
+            System.out.println();
+            System.out.println("Numero de semestre actual: " + buscarCantidadAsignaturas.getCantidadAsignaturas());
+            System.out.println();
+            
+            // Solicitar nuevo CantidadAsignaturas al usuario
+            System.out.println("Ingrese el nuevo Numero de semestre:");
+            int nuevoCantidadAsignaturas = sc.nextInt();
+            System.out.println();
+            
+            // Actualizar el CantidadAsignaturas del objeto encontrado
+            buscarCantidadAsignaturas.setCantidadAsignaturas(nuevoCantidadAsignaturas);
+            System.out.println("Numero de semestre modificado correctamente a: " + buscarCantidadAsignaturas.getCantidadAsignaturas());
+            System.out.println();
+        } else {
+            System.out.println("Registro no encontrado.");
+            System.out.println();
+        } 
+        
+        return listaedi;
+    } 
+    
+    //
+    //
+    //
 }

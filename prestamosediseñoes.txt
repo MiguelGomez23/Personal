@@ -1,7 +1,7 @@
 Cedula:  5558996
-Nombre:  Esteban
-Apellido:  Benitez
-Telefono:  3021458799
+Nombre:  rodrigo
+Apellido:  ospina
+Telefono:  123
 Modalidad de estudio:  Presencial
 Cantidad de asignaturas:  5
 Serial:  8L12347
