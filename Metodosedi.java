@@ -86,7 +86,7 @@ public class Metodosedi {
         e.exportarArchivo(lista);
     }
 
-    public LinkedList<prestamosediseño> ImportarArchivo() {
+    public LinkedList<prestamosediseño> ImportarArchivo(LinkedList<prestamosediseño> listaedi) {
         ImportarArchivoTxtedi i = new ImportarArchivoTxtedi();
         LinkedList<prestamosediseño> lista = i.leerArchivo("prestamosediseñoes");
         return lista;

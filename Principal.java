@@ -49,7 +49,7 @@ public class Principal {
                                 switch (opt) {
                                     case 1:
                                         System.out.println("Solicitar préstamo de equipo.\n");
-                                        listaedi = objMetodosedi.ImportarArchivo();
+                                        listaedi = objMetodosedi.ImportarArchivo(listaedi);
 
                                         Metodosedi objMetodosedib = new Metodosedi();
                                         Tableta tb = new Tableta();
@@ -146,7 +146,7 @@ public class Principal {
 
                                     case 2:
                                         System.out.println("Modificar préstamo de equipo.\n");
-                                        listaedi = objMetodosedi.ImportarArchivo();
+                                        listaedi = objMetodosedi.ImportarArchivo(listaedi);
                                         Metodosedi objmetodos = new Metodosedi();
                                         String SerialBuscar = "";
                                         System.out.println("Ingrese la cédula");
@@ -175,7 +175,7 @@ public class Principal {
 
                                     case 3:
                                         System.out.println("Regresar el equipo.\n");
-                                        listaedi = objMetodosedi.ImportarArchivo();
+                                        listaedi = objMetodosedi.ImportarArchivo(listaedi);
 
                                         System.out.println("Ingrese la cédula del estudiante:");
                                         String cedulaBuscar = sc.next();
@@ -186,10 +186,9 @@ public class Principal {
                                                 cedulaBuscar);
 
                                         if (prestamoEncontrado != null) {
-                                            System.out.println("Equipo asignado al estudiante:");
-                                            System.out.println("Cédula: " + prestamoEncontrado.getCedula());
-                                            System.out.println("Nombre: " + prestamoEncontrado.getNombre());
-                                            System.out.println("Apellido: " + prestamoEncontrado.getApellido());
+                                            System.out.println("El equipo asignado a esta cédula es:");
+                                            // System.out.println("Cédula: " + prestamoEncontrado.getCedula());
+                                            System.out.println("Serial: " + prestamoEncontrado.getSerial());
                                             System.out.println("-------------------------------\n");
 
                                             int Op = 0;
@@ -232,14 +231,13 @@ public class Principal {
 
                                                                 if (equipoADevolver != null) {
                                                                     listaedi.remove(prestamoEncontradob); // Remover el
-                                                                                                          // préstamo
+                                                                    objMetodosedi.ImportarArchivo(listaedi);                                      // préstamo
                                                                     objMetodosedi.ExportarArchivo(listaedi); // Exportar
-                                                                                                             // la
+                                                                                                                 // la
                                                                                                              // lista
                                                                                                              // actualizada
                                                                     listatab.add(equipoADevolver); // Agregar el equipo
-                                                                    // de nuevo al
-                                                                    // inventario
+                                                                    
                                                                     System.out.println(
                                                                             "El equipo ha sido devuelto al inventario.\n");
                                                                 } else {
