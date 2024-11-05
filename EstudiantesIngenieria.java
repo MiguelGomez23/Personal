@@ -1,5 +1,3 @@
-
-
 public class EstudiantesIngenieria {
 
     String Cedula;
@@ -66,8 +64,4 @@ public class EstudiantesIngenieria {
         Serial = serial;
     }
 
-    public String toString() {
-        return "Nombre: " + Nombre + ", Apellido: " + Apellido + ", Teléfono: " + Telefono +
-               ", Promedio: " + Promedio + ", Número de semestre: " + NumSemestre + ", Serial: " + Serial;
-    }
 }

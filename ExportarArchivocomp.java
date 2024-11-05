@@ -27,7 +27,6 @@ public class ExportarArchivocomp {
                     escriba.write("---------------------------------------\n");
                 }
 
-               
             } catch (IOException e) {
                 e.printStackTrace();
             }

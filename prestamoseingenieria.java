@@ -6,6 +6,7 @@ public class prestamoseingenieria {
     int NumSemestre;
     float Promedio;
     String Serial;
+
     public String getCedula() {
         return Cedula;
     }
@@ -48,8 +49,4 @@ public class prestamoseingenieria {
     public void setSerial(String serial) {
         Serial = serial;
     }
-
-    
-    
-
 }

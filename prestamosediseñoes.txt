@@ -4,7 +4,7 @@ Apellido:  ospina
 Telefono:  123
 Modalidad de estudio:  Presencial
 Cantidad de asignaturas:  5
-Serial:  8L12347
+Serial:  null
 ---------------------------------------
 Cedula:  89777
 Nombre:  Juan
@@ -12,5 +12,5 @@ Apellido:  Perdomo
 Telefono:  3512224788
 Modalidad de estudio:  Presencial
 Cantidad de asignaturas:  8
-Serial:  7PP5698
+Serial:  null
 ---------------------------------------

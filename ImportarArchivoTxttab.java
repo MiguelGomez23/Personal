@@ -57,7 +57,6 @@ public class ImportarArchivoTxttab {
                 tabletaes.add(tableta);
             }
 
-            // System.out.println("Archivo importado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

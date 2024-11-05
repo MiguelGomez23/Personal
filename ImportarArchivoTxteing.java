@@ -12,54 +12,46 @@ public class ImportarArchivoTxteing {
             String line;
             prestamoseingenieria prestamoseingenieria = null;
             while ((line = br.readLine()) != null) {
-                // Ignorar separadores o líneas vacías
                 if (line.trim().isEmpty() || line.startsWith("-")) {
                     continue;
                 }
 
-                // Iniciar un nuevo objeto prestamoseingenieria al encontrar "Categoria"
                 if (line.startsWith("Cedula: ")) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieriaes.add(prestamoseingenieria); // Añadir el prestamoseingenieria anterior a
-                                                                          // la lista
+                        prestamoseingenieriaes.add(prestamoseingenieria);
                     }
                     prestamoseingenieria = new prestamoseingenieria();
-                    prestamoseingenieria.setCedula(line.substring(9).trim()); // Ajustar para "Categoria: "
+                    prestamoseingenieria.setCedula(line.substring(9).trim());
                 } else if (line.startsWith("Nombre: ") && line.length() > 9) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setNombre(line.substring(9).trim()); // Remover "Nombre: "
+                        prestamoseingenieria.setNombre(line.substring(9).trim());
                     }
                 } else if (line.startsWith("Apellido: ") && line.length() > 9) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setApellido(line.substring(9).trim()); // Remover "Color: "
+                        prestamoseingenieria.setApellido(line.substring(9).trim());
                     }
                 } else if (line.startsWith("Telefono: ") && line.length() > 11) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setTelefono(line.substring(11).trim()); // Remover "Edad: "
+                        prestamoseingenieria.setTelefono(line.substring(11).trim());
                     }
                 } else if (line.startsWith("Numero de semestre: ") && line.length() > 21) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setNumSemestre(Integer.parseInt(line.substring(20).trim())); // Remover
-                                                                                                          // "Edad: "
+                        prestamoseingenieria.setNumSemestre(Integer.parseInt(line.substring(20).trim()));
                     }
                 } else if (line.startsWith("Promedio: ") && line.length() > 11) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setPromedio(Float.parseFloat(line.substring(11).trim())); // Remover
-                                                                                                       // "Edad:
-                                                                                                       // "
+                        prestamoseingenieria.setPromedio(Float.parseFloat(line.substring(11).trim()));
                     }
                 } else if (line.startsWith("Serial: ") && line.length() > 9) {
                     if (prestamoseingenieria != null) {
-                        prestamoseingenieria.setSerial(line.substring(9).trim()); // Remover "Edad: "
+                        prestamoseingenieria.setSerial(line.substring(9).trim());
                     }
                 }
             }
 
-            // Añadir el último prestamoseingenieria leido
             if (prestamoseingenieria != null) {
                 prestamoseingenieriaes.add(prestamoseingenieria);
             }
-
          
         } catch (IOException e) {
             e.printStackTrace();

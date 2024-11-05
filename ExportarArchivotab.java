@@ -26,7 +26,6 @@ public class ExportarArchivotab {
                     escriba.write("\n");
                     escriba.write("---------------------------------------\n");
                 }
-
                 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -19,37 +19,34 @@ public class ImportarArchivoTxtedi {
 
                 if (line.startsWith("Cedula: ")) {
                     if (prestamosediseño != null) {
-                        prestamosediseñoes.add(prestamosediseño); // Añadir el prestamosediseño anterior a
-                                                                  // la lista
+                        prestamosediseñoes.add(prestamosediseño);
+                                                                  
                     }
                     prestamosediseño = new prestamosediseño();
-                    prestamosediseño.setCedula(line.substring(9).trim()); // Ajustar para "Categoria: "
+                    prestamosediseño.setCedula(line.substring(9).trim());
                 } else if (line.startsWith("Nombre: ") && line.length() > 9) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setNombre(line.substring(8).trim()); // Remover "Nombre: "
+                        prestamosediseño.setNombre(line.substring(8).trim());
                     }
                 } else if (line.startsWith("Apellido: ") && line.length() > 7) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setApellido(line.substring(10).trim()); // Remover "Color: "
+                        prestamosediseño.setApellido(line.substring(10).trim());
                     }
                 } else if (line.startsWith("Telefono: ") && line.length() > 6) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setTelefono(line.substring(10).trim()); // Remover "Edad: "
+                        prestamosediseño.setTelefono(line.substring(10).trim());
                     }
                 } else if (line.startsWith("Modalidad de estudio: ") && line.length() > 23) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setModalidadEstudio(line.substring(23).trim()); // Remover
-                                                                                         // "Edad: "
+                        prestamosediseño.setModalidadEstudio(line.substring(23).trim());
                     }
                 } else if (line.startsWith("Cantidad de asignaturas: ") && line.length() > 6) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setCantidadAsignaturas(Integer.parseInt(line.substring(26).trim())); // Remover
-                        // "Edad:
-                        // "
+                        prestamosediseño.setCantidadAsignaturas(Integer.parseInt(line.substring(26).trim()));
                     }
                 } else if (line.startsWith("Serial: ") && line.length() > 6) {
                     if (prestamosediseño != null) {
-                        prestamosediseño.setSerial(line.substring(9).trim()); // Remover "Edad: "
+                        prestamosediseño.setSerial(line.substring(9).trim());
                     }
                 }
 
@@ -58,7 +55,6 @@ public class ImportarArchivoTxtedi {
             if (prestamosediseño != null) {
                 prestamosediseñoes.add(prestamosediseño);
             }
-
            
         } catch (IOException e) {
             e.printStackTrace();

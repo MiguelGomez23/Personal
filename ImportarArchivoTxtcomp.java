@@ -57,7 +57,6 @@ public class ImportarArchivoTxtcomp {
                 computadoreses.add(computadores);
             }
 
-            // System.out.println("Archivo importado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

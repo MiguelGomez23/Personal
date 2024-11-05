@@ -191,6 +191,4 @@ public class computadores {
         System.out.println("Procesador seleccionado: " + Procesador);
         System.out.println();
     }
-
-
 }

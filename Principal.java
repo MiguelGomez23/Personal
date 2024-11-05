@@ -19,6 +19,8 @@ public class Principal {
         LinkedList<computadores> listacomp = new LinkedList<>();
         LinkedList<prestamoseingenieria> listaeing = new LinkedList<>();
         LinkedList<prestamosediseño> listaedi = new LinkedList<>();
+        LinkedList<computadores> listaPrestados = new LinkedList<>();
+        LinkedList<Tableta> listaPrestadosdi = new LinkedList<>();
 
         listatab = objMetodostab.ImportarArchivo();
         listacomp = objMetodoscomp.ImportarArchivo();
@@ -50,7 +52,6 @@ public class Principal {
                                     case 1:
                                         System.out.println("Solicitar préstamo de equipo.\n");
                                         listaedi = objMetodosedi.ImportarArchivo(listaedi);
-
                                         Metodosedi objMetodosedib = new Metodosedi();
                                         Tableta tb = new Tableta();
                                         String CedulaBuscard;
@@ -58,16 +59,13 @@ public class Principal {
                                         System.out.println("Ingrese su cédula");
                                         CedulaBuscard = sc.next();
                                         prestamosediseño resultadi = objMetodosedib.Buscar(listaedi, CedulaBuscard);
-
                                         System.out.println();
 
                                         if (resultadi != null) {
-                                            System.out
-                                                    .println("Ya hay un préstamo activo con esta cédula\n");
+                                            System.out.println("Ya hay un préstamo activo con esta cédula\n");
                                         } else {
-                                            System.out.println(
-                                                    "La cédula no tiene préstamo activo, ingrésela de nuevo para continuar el "
-                                                            + "proceso del préstamo\n");
+                                            System.out.println("La cédula no tiene préstamo activo, "
+                                             + "ingrésela de nuevo para continuar el proceso del préstamo\n");
                                             listaedi = objMetodosedi.LlenarLista(listaedi);
 
                                             tb.SeleccionarMarca();
@@ -86,26 +84,21 @@ public class Principal {
                                             Float PesoBuscar = tb.getPeso();
 
                                             Tableta tabletaAsignada = null;
-                                            String serialAsignado = null; // Variable para almacenar el serial del
-                                                                          // computador asignado
+                                            String serialAsignado = null;
 
-                                            // Buscar el computador que coincida con las características
                                             for (Tableta tab : listatab) {
                                                 if (tab.getMarca().equalsIgnoreCase(MarcaBuscar) &&
-                                                        tab.getTamano() == TamanoBuscar && // Cambiado a equals para
-                                                                                           // evitar problemas de
-                                                                                           // comparación
+                                                        tab.getTamano() == TamanoBuscar &&
                                                         tab.getPrecio() == PrecioBuscar &&
                                                         tab.getAlmacenamiento().equalsIgnoreCase(AlmacenamientoBuscar)
                                                         &&
                                                         tab.getPeso() == PesoBuscar) {
                                                     tabletaAsignada = tab;
-                                                    serialAsignado = tab.getSerial(); // Asigna el serial aquí
-                                                    break; // Salir del bucle si se encuentra un computador
+                                                    serialAsignado = tab.getSerial();
+                                                    break;
                                                 }
                                             }
 
-                                            // Verificar si se encontró un computador
                                             if (tabletaAsignada != null) {
                                                 System.out.println("La tableta asignada es: ");
                                                 System.out.println("Serial: " + tabletaAsignada.getSerial());
@@ -117,24 +110,20 @@ public class Principal {
                                                 System.out.println("Peso: " + tabletaAsignada.getPeso());
                                                 System.out.println("------------------------------- \n");
 
-                                                // Eliminar el computador de la lista
                                                 listatab.remove(tabletaAsignada);
+                                                listaPrestadosdi.add(tabletaAsignada);
 
-                                                // Actualizar el serial del estudiante
                                                 for (prestamosediseño estudiante : listaedi) {
                                                     if (estudiante.getCedula().equals(CedulaBuscard)) {
-                                                        estudiante.setSerial(serialAsignado); // Asignar el serial del
-                                                                                              // computador al
-                                                                                              // estudiante
+                                                        estudiante.setSerial(serialAsignado);
                                                         System.out.println(
                                                                 "El serial de la tableta asignada al estudiante es: "
                                                                         + serialAsignado);
                                                         System.out.println();
-                                                        break; // Salir del bucle una vez que se actualiza el estudiante
+                                                        break;
                                                     }
                                                 }
 
-                                                // Exportar lista de estudiantes
                                                 objMetodosedi.ExportarArchivo(listaedi);
 
                                             } else {
@@ -145,19 +134,25 @@ public class Principal {
                                         break;
 
                                     case 2:
-
                                         listaedi = objMetodosedi.ImportarArchivo(listaedi);
+                                        System.out.println("Ingrese la cédula del estudiante que desea modificar:");
+                                        String cedulaBuscar = sc.next();
+                                        System.out.println();
 
-                                        objMetodosedi.ExportarArchivo(listaedi);
+                                        prestamosediseño estudianteModificar = null;
+                                        for (prestamosediseño est : listaedi) {
+                                            if (est.getCedula().equals(cedulaBuscar)) {
+                                                estudianteModificar = est;
+                                                break;
+                                            }
+                                        }
 
-                                        String nombrebuscar = "";
-                                        String apellidobuscar = "";
-                                        String telefonobuscar = "";
-                                        String modbuscar = "";
-                                        int cantidadbuscar = 0;
+                                        if (estudianteModificar == null) {
+                                            System.out.println("No se encontró un estudiante con la cédula ingresada.\n");
+                                            break;
+                                        }
 
                                         int oppt = 0;
-
                                         do {
                                             System.out.println("Seleccione el registro que quiere modificar: ");
                                             System.out.println("1. Nombre.");
@@ -165,84 +160,103 @@ public class Principal {
                                             System.out.println("3. Teléfono.");
                                             System.out.println("4. Modalidad de estudio.");
                                             System.out.println("5. Cantidad de asignaturas.");
+                                            System.out.println("0. Salir."); 
 
-                                            System.out.println("0. Salir."); // Opción para salir del bucle
-
-                                            // Validar que se ha ingresado un número
                                             while (!sc.hasNextInt()) {
                                                 System.out.println("Por favor, ingrese un número válido:");
-                                                sc.next(); // Limpiar el buffer
+                                                sc.next();
+                                                System.out.println();
                                             }
 
                                             oppt = sc.nextInt();
 
                                             switch (oppt) {
-
                                                 case 0:
-                                                    System.out.println("Saliendo");
+                                                    System.out.println("Saliendo\n");
                                                     break;
 
                                                 case 1:
-
-                                                    objMetodosedi.ImportarArchivo(listaedi);
-                                                    Metodosedi nombre = new Metodosedi();
-                                                    System.out.println("Ingrese el nombre que desea buscar");
-                                                    nombrebuscar = sc.next();
-                                                    listaedi = nombre.ModificarNombre(nombrebuscar, listaedi);
-                                                    objMetodosedi.MostrarLista(listaedi);
-                                                    objMetodosedi.ExportarArchivo(listaedi);
+                                                    System.out.println("Ingrese el nuevo nombre:");
+                                                    String nuevoNombre = sc.next();
+                                                    estudianteModificar.setNombre(nuevoNombre);
                                                     break;
 
                                                 case 2:
-                                                    objMetodosedi.ImportarArchivo(listaedi);
-                                                    Metodosedi apellido = new Metodosedi();
-                                                    System.out.println("Ingrese el apellido que desea buscar");
-                                                    apellidobuscar = sc.next();
-                                                    listaedi = apellido.ModificarApellido(apellidobuscar, listaedi);
-                                                    objMetodosedi.MostrarLista(listaedi);
-                                                    objMetodosedi.ExportarArchivo(listaedi);
-
+                                                    System.out.println("Ingrese el nuevo apellido:");
+                                                    String nuevoApellido = sc.next();
+                                                    estudianteModificar.setApellido(nuevoApellido);
                                                     break;
 
                                                 case 3:
-                                                    objMetodosedi.ImportarArchivo(listaedi);
-                                                    Metodosedi telefono = new Metodosedi();
-                                                    System.out.println("Ingrese el telefono que desea buscar");
-                                                    telefonobuscar = sc.next();
-                                                    listaedi = telefono.ModificarTelefono(telefonobuscar, listaedi);
-                                                    objMetodosedi.MostrarLista(listaedi);
-                                                    objMetodosedi.ExportarArchivo(listaedi);
-
+                                                    System.out.println("Ingrese el nuevo teléfono:");
+                                                    String nuevoTelefono = sc.next();
+                                                    estudianteModificar.setTelefono(nuevoTelefono);
                                                     break;
-                                                case 4:
-                                                    objMetodosedi.ImportarArchivo(listaedi);
-                                                    Metodosedi mod = new Metodosedi();
-                                                    System.out
-                                                            .println("Ingrese la modalidad de estudio que desea buscar");
-                                                    modbuscar = sc.next();
-                                                    listaedi = mod.ModificarModalidadEstudio(modbuscar, listaedi);
-                                                    objMetodosedi.MostrarLista(listaedi);
-                                                    objMetodosedi.ExportarArchivo(listaedi);
 
+                                                    case 4:
+                                                    int op = 0;
+                                                
+                                                    do {
+                                                        System.out.println("Seleccione la nueva modalidad de estudio:");
+                                                        System.out.println("1. Presencial");
+                                                        System.out.println("2. Virtual");
+                                                        System.out.println("3. Asincrónica");
+
+                                                        while (!sc.hasNextInt()) {
+                                                            System.out.println("Por favor, ingrese un número válido:");
+                                                            sc.next();
+                                                        }
+                                                
+                                                        op = sc.nextInt();
+                                                        System.out.println();
+                                                
+                                                        switch (op) {
+                                                            case 1:
+                                                                estudianteModificar.setModalidadEstudio("Presencial");
+                                                                System.out.println("Modalidad de estudio actualizada a Presencial.\n");
+                                                                break;
+                                                
+                                                            case 2:
+                                                                estudianteModificar.setModalidadEstudio("Virtual");
+                                                                System.out.println("Modalidad de estudio actualizada a Virtual.\n");
+                                                                break;
+                                                
+                                                            case 3:
+                                                                estudianteModificar.setModalidadEstudio("Asincrónica");
+                                                                System.out.println("Modalidad de estudio actualizada a Asincrónica.\n");
+                                                                break;
+                                                
+                                                            default:
+                                                                System.out.println("Opción no válida. Intente de nuevo.");
+                                                                break;
+                                                        }
+                                                
+                                                    } while (op == 1 && op == 2);
+                                                
+                                                    objMetodosedi.ExportarArchivo(listaedi);
+                                                    objMetodosedi.MostrarLista(listaedi);
                                                     break;
+                                                
+
                                                 case 5:
-                                                    objMetodosedi.ImportarArchivo(listaedi);
-                                                    Metodosedi cantidad = new Metodosedi();
-                                                    System.out
-                                                            .println("Ingrese la cantidad de asignaturas que desea buscar");
-                                                    cantidadbuscar = sc.nextInt();
-                                                    listaedi = cantidad.ModificarCantidadAsignaturas(cantidadbuscar,
-                                                            listaedi);
-                                                    objMetodosedi.MostrarLista(listaedi);
-                                                    objMetodosedi.ExportarArchivo(listaedi);
-
+                                                    System.out.println("Ingrese la nueva cantidad de asignaturas:");
+                                                    while (!sc.hasNextInt()) {
+                                                        System.out.println("Por favor, ingrese una cantidad válida:");
+                                                        sc.next();
+                                                    }
+                                                    int nuevaCantidad = sc.nextInt();
+                                                    estudianteModificar.setCantidadAsignaturas(nuevaCantidad);
                                                     break;
+
                                                 default:
                                                     System.out.println("Opción no válida. Intente de nuevo.");
                                                     break;
                                             }
 
                                         } while (oppt != 0);
+
+                                        objMetodosedi.ExportarArchivo(listaedi);
+                                        objMetodosedi.MostrarLista(listaedi);
                                         break;
 
                                     case 3:
@@ -250,17 +264,17 @@ public class Principal {
                                         listaedi = objMetodosedi.ImportarArchivo(listaedi);
 
                                         System.out.println("Ingrese la cédula del estudiante:");
-                                        String cedulaBuscar = sc.next();
+                                        String CedulaBuscar = sc.next();
                                         System.out.println();
 
-                                        // Buscar el préstamo correspondiente a la cédula
                                         prestamosediseño prestamoEncontrado = objMetodosedi.Buscar(listaedi,
-                                                cedulaBuscar);
+                                                CedulaBuscar);
 
                                         if (prestamoEncontrado != null) {
-                                            System.out.println("El equipo asignado a esta cédula es:");
-                                            // System.out.println("Cédula: " + prestamoEncontrado.getCedula());
-                                            System.out.println("Serial: " + prestamoEncontrado.getSerial());
+                                            System.out.println("Equipo asignado al estudiante:");
+                                            System.out.println("Cédula: " + prestamoEncontrado.getCedula());
+                                            System.out.println("Nombre: " + prestamoEncontrado.getNombre());
+                                            System.out.println("Apellido: " + prestamoEncontrado.getApellido());
                                             System.out.println("-------------------------------\n");
 
                                             int Op = 0;
@@ -275,52 +289,40 @@ public class Principal {
 
                                                     switch (Op) {
                                                         case 1:
-                                                            // Buscar el préstamo asociado a la cédula
-                                                            prestamosediseño prestamoEncontradob = objMetodosedi
-                                                                    .Buscar(listaedi, cedulaBuscar);
+                                                            System.out.println("Ingrese la cédula del estudiante:");
+                                                            CedulaBuscard = sc.next();
+                                                            System.out.println();
+                                                            prestamosediseño estudiante = objMetodosedi
+                                                                    .Buscar(listaedi, CedulaBuscard);
 
-                                                            if (prestamoEncontradob != null) {
-                                                                // Obtener el serial del préstamo
-                                                                String serialTableta = prestamoEncontradob
-                                                                        .getSerial();
-                                                                Tableta equipoADevolver = null;
+                                                            if (estudiante == null || estudiante.getSerial() == null) {
+                                                                System.out.println(
+                                                                        "No se encontró un préstamo activo con esta cédula.\n");
+                                                            } else {
+                                                                String serialRegresar = estudiante.getSerial();
 
-                                                                // Ahora buscar el computador en la lista de préstamos
-                                                                for (prestamosediseño prestamo : listaedi) {
-                                                                    if (prestamo.getSerial().equals(serialTableta)) {
-                                                                        // Aquí asumes que puedes crear un nuevo
-                                                                        // computador o acceder a uno existente basado
-                                                                        // en el serial
-                                                                        equipoADevolver = new Tableta(); // o busca
-                                                                                                         // en tu
-                                                                                                         // estructura
-                                                                                                         // actual
-                                                                        equipoADevolver.setSerial(serialTableta);
-                                                                        // Agregar más atributos si es necesario
+                                                                Tableta equipoDevueltodTableta = null;
+                                                                for (Tableta tableta : listaPrestadosdi) {
+                                                                    if (tableta.getSerial().equals(serialRegresar)) {
+                                                                        equipoDevueltodTableta = tableta;
                                                                         break;
                                                                     }
                                                                 }
 
-                                                                if (equipoADevolver != null) {
-                                                                    listaedi.remove(prestamoEncontradob); // Remover el
-                                                                    objMetodosedi.ImportarArchivo(listaedi); // préstamo
-                                                                    objMetodosedi.ExportarArchivo(listaedi); // Exportar
-                                                                                                             // la
-                                                                                                             // lista
-                                                                                                             // actualizada
-                                                                    listatab.add(equipoADevolver); // Agregar el equipo
+                                                                if (equipoDevueltodTableta != null) {
+                                                                    listatab.add(equipoDevueltodTableta);
+                                                                    listaPrestados.remove(equipoDevueltodTableta);
+                                                                    listaedi.remove(estudiante);
 
                                                                     System.out.println(
-                                                                            "El equipo ha sido devuelto al inventario.\n");
+                                                                            "El equipo ha sido regresado con éxito.\n");
                                                                 } else {
                                                                     System.out.println(
-                                                                            "No se encontró la tableta asociada al préstamo.\n");
+                                                                            "Prestamo no encontrado para esta cedula.\n");
                                                                 }
-                                                            } else {
-                                                                System.out.println(
-                                                                        "Préstamo no encontrado para esta cédula.\n");
+
+                                                                objMetodosedi.ExportarArchivo(listaedi);
                                                             }
-                                                            break;
 
                                                         case 2:
                                                             System.out.println("Regresando...\n");
@@ -341,13 +343,6 @@ public class Principal {
                                                     "Cédula no encontrada en el sistema, realice una solicitud.\n");
                                         }
                                         break;
-                                    /*
-                                     * case 3:
-                                     * System.out.println("Regresar el equipo.\n");
-                                     * listaedi = objMetodosedi.ImportarArchivo();
-                                     * objMetodosedi.ExportarArchivo(listaedi);
-                                     * break;
-                                     */
 
                                     case 4:
                                         System.out.println("Buscar equipo");
@@ -407,80 +402,63 @@ public class Principal {
                                         computadores cp = new computadores();
                                         String CedulaBuscarb;
 
-                                        System.out.println("Ingrese su cédula");
+                                        System.out.println("Ingrese su cédula:");
                                         CedulaBuscarb = sc.next();
                                         prestamoseingenieria resulta = objMetodoseingb.Buscar(listaeing, CedulaBuscarb);
                                         System.out.println();
 
                                         if (resulta != null) {
-                                            System.out
-                                                    .println("Ya hay un préstamo activo con esta cédula\n");
+                                            System.out.println("Ya hay un préstamo activo con esta cédula\n");
                                         } else {
                                             System.out.println(
-                                                    "La cédula no tiene préstamo activo, ingrésela de nuevo para continuar el "
-                                                            + "proceso del préstamo\n");
+                                                    "La cédula no tiene préstamo activo, ingrésela de nuevo para continuar el proceso del préstamo\n");
                                             listaeing = objMetodoseing.LLenarLista(listaeing);
 
                                             cp.SeleccionarMarca();
                                             String MarcaBuscar = cp.getMarca();
-
                                             cp.Seleccionartamaño();
                                             Float TamanoBuscar = cp.getTamano();
-
                                             cp.SeleccionarPrecio();
                                             Float PrecioBuscar = cp.getPrecio();
-
                                             cp.SeleccionarSistemaOperativo();
                                             String SOBuscar = cp.getSistemaOperativo();
-
                                             cp.SeleccionarPr();
                                             String ProcesadorBuscar = cp.getProcesador();
 
                                             computadores computadorAsignado = null;
-                                            String serialAsignado = null; // Variable para almacenar el serial del
-                                                                          // computador asignado
-
-                                            // Buscar el computador que coincida con las características
+                                            String serialAsignado = null;
                                             for (computadores comp : listacomp) {
                                                 if (comp.getMarca().equalsIgnoreCase(MarcaBuscar) &&
-                                                        comp.getTamano() == TamanoBuscar && // Cambiado a equals para
-                                                                                            // evitar problemas de
-                                                                                            // comparación
+                                                        comp.getTamano() == TamanoBuscar &&
                                                         comp.getPrecio() == PrecioBuscar &&
                                                         comp.getSistemaOperativo().equalsIgnoreCase(SOBuscar) &&
                                                         comp.getProcesador().equalsIgnoreCase(ProcesadorBuscar)) {
                                                     computadorAsignado = comp;
-                                                    serialAsignado = comp.getSerial(); // Asigna el serial aquí
-                                                    break; // Salir del bucle si se encuentra un computador
+                                                    serialAsignado = comp.getSerial();
+                                                    break;
                                                 }
                                             }
 
-                                            // Verificar si se encontró un computador
                                             if (computadorAsignado != null) {
-                                                System.out.println("El computador asignado es: ");
+                                                System.out.println("El computador asignado es:");
                                                 System.out.println("Serial: " + computadorAsignado.getSerial());
                                                 System.out.println("Marca: " + computadorAsignado.getMarca());
                                                 System.out.println("Tamaño: " + computadorAsignado.getTamano());
                                                 System.out.println("Precio: " + computadorAsignado.getPrecio());
-                                                System.out.println("Sistema operativo: "
-                                                        + computadorAsignado.getSistemaOperativo());
+                                                System.out.println("Sistema operativo: " + computadorAsignado.getSistemaOperativo());
                                                 System.out.println("Procesador: " + computadorAsignado.getProcesador());
                                                 System.out.println("------------------------------- \n");
 
-                                                // Eliminar el computador de la lista
                                                 listacomp.remove(computadorAsignado);
+                                                listaPrestados.add(computadorAsignado); 
 
-                                                // Actualizar el serial del estudiante
                                                 for (prestamoseingenieria estudiante : listaeing) {
                                                     if (estudiante.getCedula().equals(CedulaBuscarb)) {
-                                                        estudiante.setSerial(serialAsignado); // Asignar el serial del
-                                                                                              // computador al
-                                                                                              // estudiante
-                                                        System.out.println(
-                                                                "El serial del computador asignado al estudiante es: "
+                                                        estudiante.setSerial(serialAsignado);
+                                                        System.out.println("El serial del computador asignado al estudiante es: "
                                                                         + serialAsignado);
                                                         System.out.println();
-                                                        break; // Salir del bucle una vez que se actualiza el estudiante
+                                                        break;
                                                     }
                                                 }
 
@@ -495,11 +473,22 @@ public class Principal {
 
                                     case 2:
                                         listaeing = objMetodoseing.ImportarArchivo();
-                                        String nombrebuscar = "";
-                                        String apellidobuscar = "";
-                                        String telefonobuscar = "";
-                                        int numbuscar = 0;
-                                        Float promediobuscar = 0.0f;
+
+                                        System.out.println("Ingrese la cédula del estudiante que desea modificar:");
+                                        String cedulaBuscarm = sc.next();
+
+                                        prestamoseingenieria estudianteModificar = null;
+                                        for (prestamoseingenieria est : listaeing) {
+                                            if (est.getCedula().equals(cedulaBuscarm)) {
+                                                estudianteModificar = est;
+                                                break;
+                                            }
+                                        }
+
+                                        if (estudianteModificar == null) {
+                                            System.out.println("No se encontró un estudiante con la cédula ingresada.");
+                                            break;
+                                        }
 
                                         int oppt = 0;
 
@@ -510,82 +499,73 @@ public class Principal {
                                             System.out.println("3. Teléfono.");
                                             System.out.println("4. Promedio.");
                                             System.out.println("5. Número de semestre.");
+                                            System.out.println("0. Salir.");
 
-                                            System.out.println("0. Salir."); // Opción para salir del bucle
-
-                                            // Validar que se ha ingresado un número
                                             while (!sc.hasNextInt()) {
                                                 System.out.println("Por favor, ingrese un número válido:");
-                                                sc.next(); // Limpiar el buffer
+                                                sc.next();
                                             }
 
                                             oppt = sc.nextInt();
+                                            System.out.println();
 
                                             switch (oppt) {
-
                                                 case 0:
-                                                    System.out.println("Saliendo");
+                                                    System.out.println("Saliendo\n");
                                                     break;
 
                                                 case 1:
-
-                                                    objMetodoseing.ImportarArchivo();
-                                                    Metodoseing nombre = new Metodoseing();
-                                                    System.out.println("Ingrese el nombre que desea buscar");
-                                                    nombrebuscar = sc.next();
-                                                    listaeing = nombre.ModificarNombre(nombrebuscar, listaeing);
-                                                    objMetodoseing.MostrarLista(listaeing);
-                                                    objMetodoseing.ExportarArchivo(listaeing);
+                                                    System.out.println("Ingrese el nuevo nombre:");
+                                                    String nuevoNombre = sc.next();
+                                                    estudianteModificar.setNombre(nuevoNombre);
+                                                    System.out.println("DATO MODIFICADO\n");
                                                     break;
 
                                                 case 2:
-                                                    objMetodoseing.ImportarArchivo();
-                                                    Metodoseing apellido = new Metodoseing();
-                                                    System.out.println("Ingrese el apellido que desea buscar");
-                                                    apellidobuscar = sc.next();
-                                                    listaeing = apellido.ModificarApellido(apellidobuscar, listaeing);
-                                                    objMetodoseing.MostrarLista(listaeing);
-                                                    objMetodoseing.ExportarArchivo(listaeing);
-
+                                                    System.out.println("Ingrese el nuevo apellido:");
+                                                    String nuevoApellido = sc.next();
+                                                    estudianteModificar.setApellido(nuevoApellido);
+                                                    System.out.println("DATO MODIFICADO\n");
                                                     break;
 
                                                 case 3:
-                                                    objMetodoseing.ImportarArchivo();
-                                                    Metodoseing telefono = new Metodoseing();
-                                                    System.out.println("Ingrese el telefono que desea buscar");
-                                                    telefonobuscar = sc.next();
-                                                    listaeing = telefono.ModificarTelefono(telefonobuscar, listaeing);
-                                                    objMetodoseing.MostrarLista(listaeing);
-                                                    objMetodoseing.ExportarArchivo(listaeing);
-
+                                                    System.out.println("Ingrese el nuevo teléfono:");
+                                                    String nuevoTelefono = sc.next();
+                                                    estudianteModificar.setTelefono(nuevoTelefono);
+                                                    System.out.println("DATO MODIFICADO\n");
                                                     break;
+
                                                 case 4:
-                                                    objMetodoseing.ImportarArchivo();
-                                                    Metodoseing num = new Metodoseing();
-                                                    System.out
-                                                            .println("Ingrese el numero de semestre que desea buscar");
-                                                    numbuscar = sc.nextInt();
-                                                    listaeing = num.ModificarNumSemestre(numbuscar, listaeing);
-                                                    objMetodoseing.MostrarLista(listaeing);
-                                                    objMetodoseing.ExportarArchivo(listaeing);
-
+                                                    System.out.println("Ingrese el nuevo promedio:");
+                                                    while (!sc.hasNextFloat()) {
+                                                        System.out.println("Por favor, ingrese un promedio válido:");
+                                                        sc.next();
+                                                    }
+                                                    float nuevoPromedio = sc.nextFloat();
+                                                    estudianteModificar.setPromedio(nuevoPromedio);
+                                                    System.out.println("DATO MODIFICADO\n");
                                                     break;
+
                                                 case 5:
-                                                    objMetodoseing.ImportarArchivo();
-                                                    Metodoseing promedio = new Metodoseing();
-                                                    System.out.println("Ingrese el promedio que desea buscar");
-                                                    promediobuscar = sc.nextFloat();
-                                                    listaeing = promedio.ModificarPromedio(promediobuscar, listaeing);
-                                                    objMetodoseing.MostrarLista(listaeing);
-                                                    objMetodoseing.ExportarArchivo(listaeing);
-
+                                                    System.out.println("Ingrese el nuevo número de semestre:");
+                                                    while (!sc.hasNextInt()) {
+                                                        System.out.println(
+                                                                "Por favor, ingrese un número de semestre válido:");
+                                                        sc.next();
+                                                    }
+                                                    int nuevoSemestre = sc.nextInt();
+                                                    estudianteModificar.setNumSemestre(nuevoSemestre);
+                                                    System.out.println("DATO MODIFICADO\n");
                                                     break;
+
                                                 default:
                                                     System.out.println("Opción no válida. Intente de nuevo.");
                                                     break;
                                             }
 
                                         } while (oppt != 0);
+                                        objMetodoseing.ExportarArchivo(listaeing);
+                                        objMetodoseing.MostrarLista(listaeing);
                                         break;
 
                                     case 3:
@@ -596,7 +576,6 @@ public class Principal {
                                         String cedulaBuscar = sc.next();
                                         System.out.println();
 
-                                        // Buscar el préstamo correspondiente a la cédula
                                         prestamoseingenieria prestamoEncontrado = objMetodoseing.Buscar(listaeing,
                                                 cedulaBuscar);
 
@@ -619,53 +598,39 @@ public class Principal {
 
                                                     switch (Op) {
                                                         case 1:
-                                                            // Buscar el préstamo asociado a la cédula
-                                                            prestamoseingenieria prestamoEncontradob = objMetodoseing
-                                                                    .Buscar(listaeing, cedulaBuscar);
+                                                            System.out.println("Ingrese la cédula del estudiante:");
+                                                            CedulaBuscarb = sc.next();
+                                                            System.out.println();
+                                                            prestamoseingenieria estudiante = objMetodoseing
+                                                                    .Buscar(listaeing, CedulaBuscarb);
 
-                                                            if (prestamoEncontradob != null) {
-                                                                // Obtener el serial del préstamo
-                                                                String serialComputador = prestamoEncontradob
-                                                                        .getSerial();
-                                                                computadores equipoADevolver = null;
-
-                                                                // Ahora buscar el computador en la lista de préstamos
-                                                                for (prestamoseingenieria prestamo : listaeing) {
-                                                                    if (prestamo.getSerial().equals(serialComputador)) {
-                                                                        // Aquí asumes que puedes crear un nuevo
-                                                                        // computador o acceder a uno existente basado
-                                                                        // en el serial
-                                                                        equipoADevolver = new computadores(); // o busca
-                                                                                                              // en tu
-                                                                                                              // estructura
-                                                                                                              // actual
-                                                                        equipoADevolver.setSerial(serialComputador);
-                                                                        // Agregar más atributos si es necesario
+                                                            if (estudiante == null || estudiante.getSerial() == null) {
+                                                                System.out.println(
+                                                                        "No se encontró un préstamo activo con esta cédula.\n");
+                                                            } else {
+                                                                String serialRegresar = estudiante.getSerial();
+                                                                computadores equipoDevuelto = null;
+                                                                for (computadores comp : listaPrestados) {
+                                                                    if (comp.getSerial().equals(serialRegresar)) {
+                                                                        equipoDevuelto = comp;
                                                                         break;
                                                                     }
                                                                 }
 
-                                                                if (equipoADevolver != null) {
-                                                                    listaeing.remove(prestamoEncontradob); // Remover el
-                                                                                                           // préstamo
-                                                                    objMetodoseing.ExportarArchivo(listaeing); // Exportar
-                                                                                                               // la
-                                                                                                               // lista
-                                                                                                               // actualizada
-                                                                    listacomp.add(equipoADevolver); // Agregar el equipo
-                                                                                                    // de nuevo al
-                                                                                                    // inventario
+                                                                if (equipoDevuelto != null) {
+                                                                    listacomp.add(equipoDevuelto);
+                                                                    listaPrestados.remove(equipoDevuelto);
+                                                                    listaeing.remove(estudiante);
+
                                                                     System.out.println(
-                                                                            "El equipo ha sido devuelto al inventario.\n");
+                                                                            "El equipo ha sido regresado con éxito.\n");
                                                                 } else {
                                                                     System.out.println(
-                                                                            "No se encontró el computador asociado al préstamo.\n");
+                                                                            "No se encontró un equipo con el serial proporcionado en la lista de equipos prestados.\n");
                                                                 }
-                                                            } else {
-                                                                System.out.println(
-                                                                        "Préstamo no encontrado para esta cédula.\n");
+
+                                                                listaeing = objMetodoseing.ExportarArchivo(listaeing);
                                                             }
-                                                            break;
 
                                                         case 2:
                                                             System.out.println("Regresando...\n");
@@ -703,8 +668,7 @@ public class Principal {
                                             System.out.println("Marca: " + " " + result.getMarca());
                                             System.out.println("Tamaño: " + " " + result.getTamano());
                                             System.out.println("Precio: " + " " + result.getPrecio());
-                                            System.out.println(
-                                                    "Sistema Operativo: " + " " + result.getSistemaOperativo());
+                                            System.out.println("Sistema Operativo: " + " " + result.getSistemaOperativo());
                                             System.out.println("Procesador: " + " " + result.getProcesador());
                                             System.out.println();
                                             System.out.println("------------------------------- \n");
